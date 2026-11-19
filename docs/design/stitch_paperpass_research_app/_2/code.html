@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>PaperPass — 3-pass 논문 읽기 노트</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "source-arxiv": "#dc2626", "outline-variant": "#c5c6cd", "primary-fixed": "#d8e3fb", "on-primary-fixed-variant": "#3c475a", "primary": "#091426", "secondary-container": "#316bf3", "surface-container-lowest": "#ffffff", "secondary-fixed": "#dbe1ff", "on-error": "#ffffff", "on-error-container": "#93000a", "surface-dim": "#cbdbf5", "source-ieee": "#2563eb", "source-other": "#475569", "inverse-primary": "#bcc7de", "on-surface-variant": "#45474c", "on-tertiary-fixed-variant": "#00504a", "status-understood-bg": "#dcfce7", "tertiary": "#001816", "surface-tint": "#545f73", "on-tertiary-container": "#469e95", "on-tertiary": "#ffffff", "secondary-fixed-dim": "#b4c5ff", "surface-container": "#e5eeff", "tertiary-fixed": "#9cf2e8", "on-secondary": "#ffffff", "paper-canvas": "#f8fafc", "on-background": "#0b1c30", "on-primary-fixed": "#111c2d", "primary-fixed-dim": "#bcc7de", "on-secondary-fixed-variant": "#003ea8", "secondary": "#0051d5", "error": "#ba1a1a", "inverse-surface": "#213145", "pass-step-active": "#0f172a", "outline": "#75777d", "status-unknown": "#d97706", "on-surface": "#0b1c30", "paper-border": "#e2e8f0", "background": "#f8f9ff", "paper-surface": "#ffffff", "pass-step-complete": "#2563eb", "surface-variant": "#d3e4fe", "surface": "#f8f9ff", "on-primary-container": "#8590a6", "surface-container-highest": "#d3e4fe", "source-arxiv-bg": "#fee2e2", "source-other-bg": "#f1f5f9", "primary-container": "#1e293b", "surface-container-high": "#dce9ff", "inverse-on-surface": "#eaf1ff", "status-understood": "#16a34a", "surface-container-low": "#eff4ff", "on-tertiary-fixed": "#00201d", "on-primary": "#ffffff", "error-container": "#ffdad6", "source-scholar": "#059669", "status-unknown-bg": "#fef3c7", "tertiary-fixed-dim": "#80d5cb", "surface-bright": "#f8f9ff", "status-lookup": "#ca8a04", "on-secondary-fixed": "#00174b", "source-ieee-bg": "#dbeafe", "tertiary-container": "#002f2b", "on-secondary-container": "#fefcff", "source-scholar-bg": "#d1fae5", "pass-step-pending": "#cbd5e1", "status-lookup-bg": "#fef9c3" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-2xl": "3rem", "space-md": "1rem", "margin": "2.5rem", "gutter-split": "2rem", "space-xl": "2rem", "space-2xs": "0.125rem", "gutter": "1.5rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-lg": [ "Newsreader" ], "mono-cite": [ "JetBrains Mono" ], "mono-code": [ "JetBrains Mono" ], "title-md": [ "Inter" ], "body-lg": [ "Inter" ], "body-md": [ "Inter" ], "headline-md": [ "Newsreader" ], "body-sm": [ "Inter" ], "title-lg": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Newsreader" ] }, "fontSize": { "headline-lg": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "mono-cite": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.01em", "fontWeight": "500" } ], "mono-code": [ "0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ], "title-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "body-lg": [ "1rem", { "lineHeight": "1.625rem", "fontWeight": "400" } ], "body-md": [ "0.875rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "headline-md": [ "1.375rem", { "lineHeight": "1.875rem", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ], "title-lg": [ "1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-xl": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ] } } } }</script></head><body class="bg-paper-canvas font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-paper-surface border-b border-paper-border shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-[1440px] mx-auto px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="PaperPass Academic Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrB9mw9h_TfiMeFwOufktEfSefSJnXzP5llZfStr0mzDG0Lcrt_C-m8jXJa1DX7XjOesl8Isoyya2jXqgZ7svgPz0rqOgX5r0mHpc2sf5jqTJl99OPJvZUhfJ18gj8QsPuhVyLCOZtX-FU4bp8o36TkoFMlGxnijrefStrW7eqdhwcmXAt2p8oGHrHgnBSXvOxIi_PjcPK-jsQLPBl5vmplh84mMqsnTy2a-8aaW-ctv"/><div class="flex flex-col"><span class="font-headline-md text-headline-md text-primary leading-tight">PaperPass</span><span class="font-mono-cite text-mono-cite text-on-surface-variant uppercase tracking-wider">3-Pass Paper Note</span></div></div><nav class="flex items-center gap-space-xs ml-space-sm" data-active-classes="bg-surface-container-high text-primary font-semibold rounded-lg"><a class="px-space-sm py-space-xs font-title-md text-title-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="paper-list" href="#">논문 목록</a><a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-surface-container-high text-primary font-semibold rounded-lg" data-path="concept-notebook" href="#">개념 노트</a><a class="px-space-sm py-space-xs font-title-md text-title-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="reading-workspace" href="#">현재 리딩</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-low border border-paper-border"><span class="inline-flex items-center gap-1 font-mono-cite text-mono-cite text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>읽는 중 <strong class="text-primary font-semibold">4</strong></span><span class="text-outline-variant font-mono-cite text-mono-cite">·</span><span class="inline-flex items-center gap-1 font-mono-cite text-mono-cite text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-status-understood"></span>완료 <strong class="text-primary font-semibold">2</strong></span><span class="text-outline-variant font-mono-cite text-mono-cite">·</span><span class="inline-flex items-center gap-1 font-mono-cite text-mono-cite text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-status-unknown"></span>미해결 개념 <strong class="text-error font-semibold">7</strong></span></div><div class="flex items-center gap-space-sm"><button class="hidden sm:inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-lg border border-paper-border bg-paper-surface hover:bg-paper-canvas text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">menu_book</span><span class="font-label-md text-label-md">가이드</span></button><button class="inline-flex items-center gap-1.5 px-space-md py-space-xs rounded-lg bg-primary-container hover:bg-primary text-on-primary font-title-md text-title-md transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span>논문 추가</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-paper-canvas min-h-screen"><div class="flex flex-col w-full">
+<div class="max-w-[1440px] w-full mx-auto px-margin py-space-xl flex flex-col gap-space-xl">
+<!-- Top Context & Header Banner -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-space-xl shadow-sm">
+<div class="absolute -right-16 -top-24 w-96 h-96 rounded-full bg-secondary-fixed opacity-40 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex items-center gap-space-xs font-mono-cite text-mono-cite text-on-surface-variant">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold">KESHAV PASS 2 COMPANION</span>
+<span>/</span>
+<span>광전송 &amp; DSP 신호처리 지식 베이스</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">전제 개념 노트 (Concept Notebook)</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+            논문을 읽다 막힌 개념들을 내 언어로 정리하고, 논문 간 반복 등장하는 핵심 신호처리 개념을 축적합니다.
+          </p>
+</div>
+<!-- Metric Summary Chips -->
+<div class="flex flex-wrap items-center gap-space-sm bg-surface-container-lowest p-space-sm rounded-xl shadow-sm self-start lg:self-auto">
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container-low text-primary">
+<span class="font-label-md text-label-md text-on-surface-variant">전체 개념</span>
+<span class="font-mono-cite text-title-md font-bold text-primary" id="metric-total">7</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-status-unknown-bg text-status-unknown">
+<span class="w-2 h-2 rounded-full bg-status-unknown"></span>
+<span class="font-label-md text-label-md">모름</span>
+<span class="font-mono-cite text-title-md font-bold text-status-unknown" id="metric-unknown">2</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-status-lookup-bg text-status-lookup">
+<span class="w-2 h-2 rounded-full bg-status-lookup"></span>
+<span class="font-label-md text-label-md">찾아봄</span>
+<span class="font-mono-cite text-title-md font-bold text-status-lookup" id="metric-lookup">2</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-status-understood-bg text-status-understood">
+<span class="w-2 h-2 rounded-full bg-status-understood"></span>
+<span class="font-label-md text-label-md">이해함</span>
+<span class="font-mono-cite text-title-md font-bold text-status-understood" id="metric-understood">3</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Toolbar: Filter Pills, Search Bar, Merging & Sorting -->
+<div class="flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<!-- Filter Tabs -->
+<div class="flex items-center gap-space-xs p-1 bg-surface-container rounded-lg" id="filter-group">
+<button class="filter-btn active-filter px-3 py-1.5 rounded bg-surface-container-lowest text-primary font-title-md text-title-md shadow-sm transition-all" onclick="setFilter('all', this)" type="button">
+            전체 보기 <span class="font-mono-cite text-mono-cite ml-1 text-on-surface-variant font-normal">7</span>
+</button>
+<button class="filter-btn px-3 py-1.5 rounded text-on-surface-variant hover:text-primary font-title-md text-title-md transition-all" onclick="setFilter('unknown', this)" type="button">
+            모름 <span class="font-mono-cite text-mono-cite ml-1 px-1.5 py-0.5 rounded bg-status-unknown-bg text-status-unknown">2</span>
+</button>
+<button class="filter-btn px-3 py-1.5 rounded text-on-surface-variant hover:text-primary font-title-md text-title-md transition-all" onclick="setFilter('lookup', this)" type="button">
+            찾아봄 <span class="font-mono-cite text-mono-cite ml-1 px-1.5 py-0.5 rounded bg-status-lookup-bg text-status-lookup">2</span>
+</button>
+<button class="filter-btn px-3 py-1.5 rounded text-on-surface-variant hover:text-primary font-title-md text-title-md transition-all" onclick="setFilter('understood', this)" type="button">
+            이해함 <span class="font-mono-cite text-mono-cite ml-1 px-1.5 py-0.5 rounded bg-status-understood-bg text-status-understood">3</span>
+</button>
+</div>
+<!-- Utility Group: Merge Checkbox toggle & Sorting -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-title-md text-title-md transition-colors shadow-sm" id="btn-merge-action" onclick="toggleMergeSelectMode()" type="button">
+<span class="material-symbols-outlined text-[18px]">link</span>
+<span>선택한 개념 합치기 (수동 병합)</span>
+<span class="hidden ml-1 px-1.5 py-0.2 rounded-full bg-secondary text-on-secondary font-mono-cite text-mono-cite" id="merge-count-badge">0</span>
+</button>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1.5 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-outline text-[18px]">swap_vert</span>
+<select class="bg-transparent font-title-md text-title-md text-primary focus:outline-none cursor-pointer" id="sort-select">
+<option selected="" value="unresolved_freq">미해결 개념 중 등장 논문 많은 순 (기본)</option>
+<option value="freq">전체 등장 논문 빈출순</option>
+<option value="alphabetical">개념명 가나다순</option>
+<option value="recent">최근 추가순</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Live Search Bar -->
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[20px]">search</span>
+</div>
+<input class="w-full pl-10 pr-10 py-2.5 rounded-lg bg-surface-container-lowest text-primary font-body-md text-body-md shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary placeholder:text-outline" id="concept-search" oninput="handleSearch(this.value)" placeholder="개념명, 설명, 등장 논문 검색... (예: Volterra, ISI, 등화기, Sec. III-A)" type="text"/>
+<div class="absolute inset-y-0 right-0 pr-3.5 flex items-center gap-1">
+<kbd class="hidden sm:inline-block px-1.5 py-0.5 rounded bg-surface-container font-mono-cite text-mono-cite text-on-surface-variant">⌘K</kbd>
+</div>
+</div>
+</div>
+<!-- Active Merge Banner (Contextual) -->
+<div class="hidden items-center justify-between bg-primary-container text-on-primary px-space-md py-space-sm rounded-lg shadow-md transition-all" id="merge-bar">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary-fixed">merge_type</span>
+<span class="font-body-md text-body-md">합칠 개념 2개 이상을 선택해주세요. (동의어 혹은 상위-하위 개념 일원화)</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-3 py-1 rounded bg-surface-container-highest/20 text-on-primary font-label-md text-label-md hover:bg-surface-container-highest/30" onclick="cancelMergeMode()" type="button">취소</button>
+<button class="px-3 py-1 rounded bg-secondary text-on-secondary font-title-md text-title-md shadow-sm" onclick="openMergeModal()" type="button">병합 실행</button>
+</div>
+</div>
+<!-- Main Dynamic Content Area: 2-Column Split (List & Quick Companion Panel) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-split items-start">
+<!-- Left: Concepts Cards Collection (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md" id="cards-container">
+<!-- Concept 1: ISI -->
+<article class="concept-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col gap-space-md" data-freq="3" data-status="unknown">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<input class="merge-checkbox hidden mt-1.5 w-4 h-4 rounded text-secondary focus:ring-0 cursor-pointer" data-term="ISI (Intersymbol Interference, 심볼 간 간섭)" onchange="updateMergeSelection()" type="checkbox"/>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-2 flex-wrap">
+<h2 class="font-headline-md text-headline-md text-primary font-semibold">ISI (Intersymbol Interference, 심볼 간 간섭)</h2>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-status-unknown-bg text-status-unknown font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-unknown"></span>
+                    모름
+                  </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono-cite text-mono-cite">
+<span class="material-symbols-outlined text-[15px] text-secondary">menu_book</span>
+<button class="hover:text-secondary flex items-center gap-1 font-semibold underline decoration-dotted" onclick="toggleMentions('mentions-1')" type="button">
+                    등장 논문 3편
+                    <span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<span class="text-outline-variant">·</span>
+<span>최초 발견: 2024.10.14</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" onclick="openDrawer('ISI (Intersymbol Interference, 심볼 간 간섭)', 'unknown')" title="개념 편집" type="button">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</button>
+</div>
+</div>
+<!-- Mentions Expansion (Collapsible) -->
+<div class="hidden bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-space-xs font-mono-code text-mono-code" id="mentions-1">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-semibold text-primary">인용 및 출현 위치:</span>
+<span class="text-outline-variant text-[11px]">총 3회 등장</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-lowest">
+<div class="flex items-center gap-2 truncate">
+<span class="px-1.5 py-0.2 rounded bg-source-ieee-bg text-source-ieee font-mono-cite text-mono-cite font-semibold">IEEE</span>
+<span class="truncate text-primary">① Deep Learning-Based Equalization for 100G PAM4...</span>
+</div>
+<span class="text-outline shrink-0 ml-2 font-mono-cite text-mono-cite">Sec. III-A (식 3)</span>
+</div>
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-lowest">
+<div class="flex items-center gap-2 truncate">
+<span class="px-1.5 py-0.2 rounded bg-source-arxiv-bg text-source-arxiv font-mono-cite text-mono-cite font-semibold">ARXIV</span>
+<span class="truncate text-primary">② Geometric Deep Learning for DMT Signal Modeling...</span>
+</div>
+<span class="text-outline shrink-0 ml-2 font-mono-cite text-mono-cite">Introduction</span>
+</div>
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-lowest">
+<div class="flex items-center gap-2 truncate">
+<span class="px-1.5 py-0.2 rounded bg-source-scholar-bg text-source-scholar font-mono-cite text-mono-cite font-semibold">SCHOLAR</span>
+<span class="truncate text-primary">③ End-to-End Transceiver Optimization for Short-Reach...</span>
+</div>
+<span class="text-outline shrink-0 ml-2 font-mono-cite text-mono-cite">Sec. II-C</span>
+</div>
+</div>
+</div>
+<!-- Description Section: Empty CTA State -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-status-unknown text-[22px]">help_center</span>
+<span class="font-body-md text-body-md italic text-outline">아직 정리된 내 언어 설명이 없습니다.</span>
+</div>
+<button class="inline-flex items-center gap-1 font-title-md text-title-md text-secondary hover:underline self-start sm:self-auto font-semibold" onclick="openDrawer('ISI (Intersymbol Interference, 심볼 간 간섭)', 'unknown')" type="button">
+<span>내 말로 설명하고 이해함으로 바꾸기</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Bottom Footer References & Quick Actions -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs text-on-surface-variant font-mono-cite text-mono-cite">
+<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-secondary py-1" onclick="openDrawer('ISI (Intersymbol Interference, 심볼 간 간섭)', 'unknown')" type="button">
+<span class="material-symbols-outlined text-[16px]">add_link</span>
+<span>+ 참고 링크/자료 추가</span>
+</button>
+<div class="flex items-center gap-1">
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-status-lookup-bg hover:text-status-lookup transition-colors" onclick="quickUpdateStatus(this, 'lookup')" type="button">찾아봄으로 변경</button>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-status-understood-bg hover:text-status-understood transition-colors" onclick="quickUpdateStatus(this, 'understood')" type="button">이해함으로 승격</button>
+</div>
+</div>
+</article>
+<!-- Concept 2: Volterra 비선형 왜곡 모델 -->
+<article class="concept-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col gap-space-md" data-freq="2" data-status="lookup">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<input class="merge-checkbox hidden mt-1.5 w-4 h-4 rounded text-secondary focus:ring-0 cursor-pointer" data-term="Volterra 비선형 왜곡 모델" onchange="updateMergeSelection()" type="checkbox"/>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-2 flex-wrap">
+<h2 class="font-headline-md text-headline-md text-primary font-semibold">Volterra 비선형 왜곡 모델</h2>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-status-lookup-bg text-status-lookup font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-lookup"></span>
+                    찾아봄
+                  </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono-cite text-mono-cite">
+<span class="material-symbols-outlined text-[15px] text-secondary">menu_book</span>
+<button class="hover:text-secondary flex items-center gap-1 font-semibold underline decoration-dotted" onclick="toggleMentions('mentions-2')" type="button">
+                    등장 논문 2편
+                    <span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<span class="text-outline-variant">·</span>
+<span>Sec. II-B 식 (4)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" onclick="openDrawer('Volterra 비선형 왜곡 모델', 'lookup')" title="개념 편집" type="button">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</button>
+</div>
+</div>
+<!-- Mentions Expansion -->
+<div class="hidden bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-space-xs font-mono-code text-mono-code" id="mentions-2">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-semibold text-primary">인용 및 출현 위치:</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-lowest">
+<div class="flex items-center gap-2 truncate">
+<span class="px-1.5 py-0.2 rounded bg-source-ieee-bg text-source-ieee font-mono-cite text-mono-cite font-semibold">IEEE</span>
+<span class="truncate text-primary">① Volterra vs NN Equalizers for Optical Interconnects</span>
+</div>
+<span class="text-outline shrink-0 ml-2 font-mono-cite text-mono-cite">Sec. II-B 식 (4)</span>
+</div>
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-lowest">
+<div class="flex items-center gap-2 truncate">
+<span class="px-1.5 py-0.2 rounded bg-source-arxiv-bg text-source-arxiv font-mono-cite text-mono-cite font-semibold">ARXIV</span>
+<span class="truncate text-primary">② Deep Learning-Based Equalization for 100G PAM4...</span>
+</div>
+<span class="text-outline shrink-0 ml-2 font-mono-cite text-mono-cite">Sec. IV</span>
+</div>
+</div>
+</div>
+<!-- Description Section: Populated with Student's Explanation -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">내 말로 정리한 핵심 설명</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              입력 신호의 고차 거듭제곱과 시간 지연 곱을 사용해 메모리 비선형 왜곡을 근사하는 테일러 급수의 다차원 확장 모델. 커널 차수가 늘어나면 계산 복잡도가 기하급수적으로 폭증함.
+            </p>
+</div>
+<!-- Attached References -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-outline font-semibold">참고 자료 링크 (2)</span>
+<div class="flex flex-wrap items-center gap-space-sm font-mono-cite text-mono-cite">
+<a class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[15px] text-secondary">picture_as_pdf</span>
+<span>DSP 교재 Ch. 7 비선형 등화 PDF</span>
+</a>
+<a class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[15px] text-secondary">open_in_new</span>
+<span>Wikipedia: Volterra series</span>
+</a>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">추천 액션: 실험 파트의 메모리 길이 L 확인 필요</span>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-status-understood text-on-primary hover:opacity-90 font-title-md text-title-md transition-all shadow-sm" onclick="quickUpdateStatus(this, 'understood')" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>이해함으로 승격 완료</span>
+</button>
+</div>
+</article>
+<!-- Concept 3: DMT (Discrete Multitone) -->
+<article class="concept-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col gap-space-md" data-freq="2" data-status="unknown">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<input class="merge-checkbox hidden mt-1.5 w-4 h-4 rounded text-secondary focus:ring-0 cursor-pointer" data-term="DMT (Discrete Multitone)" onchange="updateMergeSelection()" type="checkbox"/>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-2 flex-wrap">
+<h2 class="font-headline-md text-headline-md text-primary font-semibold">DMT (Discrete Multitone)</h2>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-status-unknown-bg text-status-unknown font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-unknown"></span>
+                    모름
+                  </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono-cite text-mono-cite">
+<span class="material-symbols-outlined text-[15px] text-secondary">menu_book</span>
+<span>등장 논문 2편</span>
+<span class="text-outline-variant">·</span>
+<span>광/유선 채널 분할</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" onclick="openDrawer('DMT (Discrete Multitone)', 'unknown')" title="개념 편집" type="button">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</button>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">내 말로 정리한 핵심 설명</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              대역을 여러 개의 직교 서브채널로 나누어 비트와 전력을 적응적으로 할당하는 광/유선 변조 기법 (OFDM과 유사).
+            </p>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<button class="font-mono-cite text-mono-cite text-secondary hover:underline inline-flex items-center gap-1" onclick="openDrawer('DMT (Discrete Multitone)', 'unknown')" type="button">
+<span class="material-symbols-outlined text-[15px]">add_link</span>
+<span>참고 자료 0건 (추가하기)</span>
+</button>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-status-lookup-bg hover:text-status-lookup font-title-md text-body-sm transition-colors" onclick="quickUpdateStatus(this, 'lookup')" type="button">찾아봄</button>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-status-understood-bg hover:text-status-understood font-title-md text-body-sm transition-colors" onclick="quickUpdateStatus(this, 'understood')" type="button">이해함</button>
+</div>
+</div>
+</article>
+<!-- Concept 4: IM/DD (강도변조 / 직접검출) -->
+<article class="concept-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col gap-space-md" data-freq="4" data-status="understood">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<input class="merge-checkbox hidden mt-1.5 w-4 h-4 rounded text-secondary focus:ring-0 cursor-pointer" data-term="IM/DD (강도변조 / 직접검출)" onchange="updateMergeSelection()" type="checkbox"/>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-2 flex-wrap">
+<h2 class="font-headline-md text-headline-md text-primary font-semibold">IM/DD (강도변조 / 직접검출)</h2>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-status-understood-bg text-status-understood font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-understood"></span>
+                    이해함
+                  </span>
+<span class="px-2 py-0.5 rounded bg-primary text-on-primary font-mono-cite text-mono-cite font-semibold">최다 빈출 개념</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono-cite text-mono-cite">
+<span class="material-symbols-outlined text-[15px] text-secondary">menu_book</span>
+<button class="hover:text-secondary flex items-center gap-1 font-semibold underline decoration-dotted" onclick="toggleMentions('mentions-4')" type="button">
+                    등장 논문 4편
+                    <span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<span class="text-outline-variant">·</span>
+<span>단거리 광링크 기본 구조</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" onclick="openDrawer('IM/DD (강도변조 / 직접검출)', 'understood')" title="개념 편집" type="button">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</button>
+</div>
+</div>
+<!-- Mentions Collapsible for IM/DD -->
+<div class="hidden bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-space-xs font-mono-code text-mono-code" id="mentions-4">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-semibold text-primary">인용 및 출현 위치:</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+<div class="p-1.5 rounded bg-surface-container-lowest flex items-center justify-between text-[11px]">
+<span class="truncate">① IEEE 100G PAM4 Direct Detection</span>
+<span class="text-outline">Sec. I</span>
+</div>
+<div class="p-1.5 rounded bg-surface-container-lowest flex items-center justify-between text-[11px]">
+<span class="truncate">② Volterra Equalizers for IM/DD</span>
+<span class="text-outline">Sec. II</span>
+</div>
+<div class="p-1.5 rounded bg-surface-container-lowest flex items-center justify-between text-[11px]">
+<span class="truncate">③ End-to-End Transceiver Optics</span>
+<span class="text-outline">Fig. 1</span>
+</div>
+<div class="p-1.5 rounded bg-surface-container-lowest flex items-center justify-between text-[11px]">
+<span class="truncate">④ Low-complexity DFE for 2km link</span>
+<span class="text-outline">Sec. III-C</span>
+</div>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">내 말로 정리한 핵심 설명</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              코히런트 검출과 달리 위상을 보지 않고 오직 광신호의 세기(Power)만 변조하고 PD로 직접 제곱 검출하는 방식. 비용과 전력 소모가 적어 데이터센터 단거리 링크의 표준.
+            </p>
+</div>
+<div class="flex items-center justify-between pt-space-xs font-mono-cite text-mono-cite text-on-surface-variant">
+<span>마스터 완료 · 2024.10.18</span>
+<span class="text-status-understood font-semibold">개념 자산화 완료 ✓</span>
+</div>
+</article>
+<!-- Concept 5: 적응 등화 (Adaptive Equalization: FFE / DFE) -->
+<article class="concept-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col gap-space-md" data-freq="2" data-status="understood">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<input class="merge-checkbox hidden mt-1.5 w-4 h-4 rounded text-secondary focus:ring-0 cursor-pointer" data-term="적응 등화 (Adaptive Equalization: FFE / DFE)" onchange="updateMergeSelection()" type="checkbox"/>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-2 flex-wrap">
+<h2 class="font-headline-md text-headline-md text-primary font-semibold">적응 등화 (Adaptive Equalization: FFE / DFE)</h2>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-status-understood-bg text-status-understood font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-understood"></span>
+                    이해함
+                  </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono-cite text-mono-cite">
+<span class="material-symbols-outlined text-[15px] text-secondary">menu_book</span>
+<span>등장 논문 2편</span>
+<span class="text-outline-variant">·</span>
+<span>선형 필터 탭 적응 알고리즘 (LMS/RLS)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" onclick="openDrawer('적응 등화 (Adaptive Equalization: FFE / DFE)', 'understood')" title="개념 편집" type="button">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+</button>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">내 말로 정리한 핵심 설명</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              채널의 왜곡 특성을 실시간으로 추정하여 탭 계수를 업데이트하는 필터. Feed-Forward(FFE)는 선형 왜곡 보상, Decision Feedback(DFE)은 이전 판정 결과를 사용해 후속 간섭을 제거하지만 에러 전파(Error Propagation) 위험이 존재.
+            </p>
+</div>
+<div class="flex items-center justify-between pt-space-xs font-mono-cite text-mono-cite text-on-surface-variant">
+<span>참고자료 1건 등록됨</span>
+<button class="text-secondary hover:underline" onclick="openDrawer('적응 등화 (Adaptive Equalization: FFE / DFE)', 'understood')" type="button">상세 편집</button>
+</div>
+</article>
+<!-- Empty State Preview Box (Hidden by default, shown when filters return 0) -->
+<div class="hidden flex-col items-center justify-center p-space-2xl bg-surface-container-lowest rounded-xl shadow-sm text-center" id="empty-state-notice">
+<div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center text-outline mb-space-sm">
+<span class="material-symbols-outlined text-[32px]">folder_off</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-primary font-semibold">일치하는 개념 노트가 없습니다</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mt-1 mb-space-md">
+            검색어를 변경하거나 필터를 해제해 보세요. Pass 2를 읽으며 발생한 새로운 용어는 우측 패널에서 바로 등록할 수 있습니다.
+          </p>
+<button class="px-4 py-2 rounded-lg bg-primary-container text-on-primary font-title-md text-title-md hover:bg-primary transition-colors" onclick="resetFilters()" type="button">
+            필터 초기화
+          </button>
+</div>
+</div>
+<!-- Right: Research Companion & Concept Shelf (4 Cols Sticky) -->
+<aside class="lg:col-span-4 sticky top-24 flex flex-col gap-space-md">
+<!-- Quick Term Add Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">add_circle</span>
+              새 전제 개념 즉시 추가
+            </span>
+<span class="font-mono-cite text-mono-cite text-outline">Pass 2 Companion</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            논문 읽기 흐름을 깨지 않고 막힌 용어와 위치를 먼저 메모해 두세요.
+          </p>
+<form class="flex flex-col gap-2.5 pt-1" onsubmit="handleQuickAdd(event)">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">개념명 / 용어</label>
+<input class="w-full px-3 py-2 rounded bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-secondary placeholder:text-outline" id="quick-term" placeholder="예: Kramers-Kronig 수신기" required="" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">초기 상태</label>
+<select class="w-full px-2.5 py-2 rounded bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-secondary" id="quick-status">
+<option selected="" value="unknown">모름 (Amber)</option>
+<option value="lookup">찾아봄 (Yellow)</option>
+<option value="understood">이해함 (Green)</option>
+</select>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">출현 위치</label>
+<input class="w-full px-3 py-2 rounded bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-secondary placeholder:text-outline" id="quick-loc" placeholder="예: Sec. II, Fig. 3" type="text"/>
+</div>
+</div>
+<button class="w-full mt-1 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-title-md text-title-md transition-all shadow-sm flex items-center justify-center gap-1.5" type="submit">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+<span>선반에 추가</span>
+</button>
+</form>
+</div>
+<!-- Concept Network & Synthesis Insight Box -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
+<span class="font-title-md text-title-md text-primary font-semibold">신호처리 개념 군집 현황</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            현재 5편의 논문에서 <strong>등화(Equalization)</strong>와 <strong>비선형 모델(Volterra)</strong> 축으로 개념이 집중 축적되고 있습니다.
+          </p>
+<!-- Mini SVG Network Visualization -->
+<div class="w-full h-36 bg-surface-container-lowest rounded-lg p-2 flex items-center justify-center overflow-hidden relative">
+<svg class="w-full h-full text-secondary" fill="none" viewbox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+<!-- Cluster lines -->
+<line stroke="currentColor" stroke-dasharray="3 3" stroke-opacity="0.2" stroke-width="2" x1="60" x2="150" y1="60" y2="40"></line>
+<line stroke="currentColor" stroke-opacity="0.3" stroke-width="2" x1="150" x2="240" y1="40" y2="60"></line>
+<line stroke="currentColor" stroke-opacity="0.4" stroke-width="2" x1="150" x2="150" y1="40" y2="95"></line>
+<line stroke="currentColor" stroke-opacity="0.2" stroke-width="1.5" x1="60" x2="150" y1="60" y2="95"></line>
+<!-- Node: ISI -->
+<circle class="fill-status-unknown-bg stroke-status-unknown" cx="60" cy="60" r="18" stroke-width="2"></circle>
+<text fill="#091426" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="60" y="64">ISI</text>
+<!-- Hub Node: IM/DD (Core) -->
+<circle class="fill-surface-container-high stroke-secondary" cx="150" cy="40" r="24" stroke-width="2.5"></circle>
+<text fill="#091426" font-family="JetBrains Mono" font-size="11" font-weight="700" text-anchor="middle" x="150" y="44">IM/DD</text>
+<!-- Node: Volterra -->
+<circle class="fill-status-lookup-bg stroke-status-lookup" cx="240" cy="60" r="20" stroke-width="2"></circle>
+<text fill="#091426" font-family="JetBrains Mono" font-size="9" font-weight="600" text-anchor="middle" x="240" y="64">Volterra</text>
+<!-- Node: Equalizer -->
+<circle class="fill-status-understood-bg stroke-status-understood" cx="150" cy="95" r="16" stroke-width="2"></circle>
+<text fill="#091426" font-family="JetBrains Mono" font-size="9" font-weight="600" text-anchor="middle" x="150" y="99">DFE</text>
+</svg>
+<div class="absolute bottom-1.5 right-2 font-mono-cite text-[10px] text-outline">반복 연관도 시각화</div>
+</div>
+<div class="pt-1 flex flex-col gap-1 text-on-surface-variant font-mono-cite text-mono-cite">
+<div class="flex items-center justify-between">
+<span>미해결 해결율</span>
+<span class="font-bold text-primary">42.8%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-status-understood rounded-full" style="width: 42.8%"></div>
+</div>
+</div>
+</div>
+<!-- Academic Quote Reminder -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest text-on-surface-variant font-mono-cite text-mono-cite flex items-start gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary shrink-0 mt-0.5">tips_and_updates</span>
+<p class="leading-relaxed">
+<strong class="text-primary">Keshav Pass 2 원칙:</strong> 저자의 용어를 무비판적으로 베끼지 말고, 자신의 기존 지식 체계와 매핑되는 직관적인 어휘로 번역하여 요약하십시오.
+          </p>
+</div>
+</aside>
+</div>
+</div>
+<!-- Slide-Over Drawer: Concept Editor & Reference Links Manager -->
+<div class="fixed inset-0 bg-primary/40 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200" id="drawer-backdrop" onclick="closeDrawer()"></div>
+<aside class="fixed top-0 right-0 bottom-0 w-full max-w-xl bg-paper-surface z-50 shadow-2xl flex flex-col justify-between translate-x-full transition-transform duration-300 ease-in-out" id="editor-drawer">
+<div class="flex flex-col h-full overflow-y-auto">
+<!-- Drawer Header -->
+<div class="sticky top-0 bg-paper-surface p-space-lg flex items-center justify-between shadow-sm z-10">
+<div class="flex flex-col">
+<span class="font-mono-cite text-mono-cite text-secondary uppercase font-semibold">Concept Deep-Dive &amp; Synthesis</span>
+<h3 class="font-headline-md text-headline-md text-primary font-bold" id="drawer-title">개념 상세 편집</h3>
+</div>
+<button class="p-1 rounded-lg hover:bg-surface-container text-on-surface-variant transition-colors" onclick="closeDrawer()" type="button">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+</div>
+<!-- Drawer Body Fields -->
+<div class="p-space-lg flex flex-col gap-space-lg">
+<!-- Status Switcher -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface-variant font-semibold">이해도 상태 승격</label>
+<div class="grid grid-cols-3 gap-2">
+<label class="cursor-pointer">
+<input class="peer sr-only" name="drawer-status" type="radio" value="unknown"/>
+<div class="p-2.5 rounded-lg bg-surface-container text-center font-title-md text-body-sm peer-checked:bg-status-unknown-bg peer-checked:text-status-unknown peer-checked:font-bold transition-all">
+                모름
+              </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="drawer-status" type="radio" value="lookup"/>
+<div class="p-2.5 rounded-lg bg-surface-container text-center font-title-md text-body-sm peer-checked:bg-status-lookup-bg peer-checked:text-status-lookup peer-checked:font-bold transition-all">
+                찾아봄
+              </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="drawer-status" type="radio" value="understood"/>
+<div class="p-2.5 rounded-lg bg-surface-container text-center font-title-md text-body-sm peer-checked:bg-status-understood-bg peer-checked:text-status-understood peer-checked:font-bold transition-all">
+                이해함
+              </div>
+</label>
+</div>
+</div>
+<!-- Student Definition Prompt -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-primary font-semibold">내 말로 다시 쓴 설명 (Synthesis)</label>
+<span class="font-mono-cite text-mono-cite text-outline">파인만 기법 권장</span>
+</div>
+<textarea class="w-full p-3 rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-secondary leading-relaxed" id="drawer-desc" placeholder="전문 용어를 최대한 배제하고, 동료 학부 연구생에게 설명하듯 내 언어로 정리해 보세요..." rows="5"></textarea>
+</div>
+<!-- Reference Links (Up to 3) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-primary font-semibold">참고 자료 및 증거 URL (최대 3개)</label>
+<span class="font-mono-cite text-mono-cite text-outline-variant">2 / 3 등록됨</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-outline">link</span>
+<input class="flex-1 px-3 py-1.5 rounded bg-surface-container-low text-primary font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary" placeholder="자료 설명/제목" type="text" value="DSP 교재 Ch. 7 비선형 등화 PDF"/>
+<button class="text-error hover:bg-error-container p-1 rounded" type="button"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-outline">link</span>
+<input class="flex-1 px-3 py-1.5 rounded bg-surface-container-low text-primary font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary" placeholder="자료 URL 혹은 서적" type="text" value="https://en.wikipedia.org/wiki/Volterra_series"/>
+<button class="text-error hover:bg-error-container p-1 rounded" type="button"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+<button class="inline-flex items-center gap-1.5 text-secondary hover:underline font-title-md text-body-sm self-start mt-1" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+<span>새 참고 링크 추가</span>
+</button>
+</div>
+</div>
+<!-- Merging / Alias Section -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-1.5 text-primary font-semibold font-title-md text-title-md">
+<span class="material-symbols-outlined text-secondary text-[18px]">call_split</span>
+<span>동의어 / 별칭 (Aliases)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            다른 논문에서 이 개념을 다른 약어나 철자로 지칭할 경우 추가해 두면 자동 매칭됩니다.
+          </p>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-lowest font-mono-cite text-mono-cite text-primary">
+              Volterra Filter
+              <span class="material-symbols-outlined text-[14px] text-outline cursor-pointer hover:text-error">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-lowest font-mono-cite text-mono-cite text-primary">
+              볼테라 급수
+              <span class="material-symbols-outlined text-[14px] text-outline cursor-pointer hover:text-error">close</span>
+</span>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high font-mono-cite text-mono-cite text-secondary" type="button">+ 별칭</button>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="sticky bottom-0 bg-paper-surface p-space-md shadow-lg flex items-center justify-between gap-space-sm mt-auto">
+<button class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-title-md text-title-md transition-colors" onclick="closeDrawer()" type="button">
+          취소
+        </button>
+<div class="flex items-center gap-2">
+<button class="px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-title-md text-title-md transition-colors shadow-sm" onclick="saveDrawerChanges()" type="button">
+            저장 및 동기화
+          </button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Manual Merge Modal -->
+<dialog class="rounded-xl p-0 backdrop:bg-primary/50 bg-paper-surface shadow-2xl max-w-lg w-full" id="merge-modal">
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[24px]">merge_type</span>
+<h3 class="font-headline-md text-headline-md text-primary font-bold">개념 통합 (수동 병합)</h3>
+</div>
+<button class="text-outline hover:text-primary" onclick="closeMergeModal()" type="button"><span class="material-symbols-outlined">close</span></button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        선택한 복수 개의 개념을 하나의 대표 개념으로 통합합니다. 등장했던 논문 기록 및 참고 자료가 모두 병합됩니다.
+      </p>
+<div class="flex flex-col gap-2 p-space-sm rounded-lg bg-surface-container-low font-mono-cite text-mono-cite" id="merge-selection-list">
+<!-- Injected via JS -->
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-primary font-semibold">대표 개념명 선택 또는 입력</label>
+<input class="w-full px-3 py-2 rounded bg-surface-container-low text-primary font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-secondary" id="merge-target-name" placeholder="예: Intersymbol Interference (ISI)" type="text"/>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-2">
+<button class="px-4 py-2 rounded-lg bg-surface-container text-on-surface font-title-md text-title-md hover:bg-surface-container-high" onclick="closeMergeModal()" type="button">취소</button>
+<button class="px-4 py-2 rounded-lg bg-secondary text-on-secondary font-title-md text-title-md shadow-sm" onclick="executeMerge()" type="button">병합 확정</button>
+</div>
+</div>
+</dialog>
+</div>
+<script>
+  let currentFilter = 'all';
+  let isMergeMode = false;
+  let selectedForMerge = [];
+
+  function setFilter(status, btn) {
+    currentFilter = status;
+    
+    // Update active tab visual
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+      b.classList.add('text-on-surface-variant');
+    });
+    btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+    btn.classList.remove('text-on-surface-variant');
+
+    filterCards();
+  }
+
+  function handleSearch(term) {
+    filterCards();
+  }
+
+  function filterCards() {
+    const query = (document.getElementById('concept-search')?.value || '').toLowerCase().trim();
+    const cards = document.querySelectorAll('.concept-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const cardStatus = card.getAttribute('data-status');
+      const textContent = card.textContent.toLowerCase();
+      
+      const matchesFilter = (currentFilter === 'all') || (cardStatus === currentFilter);
+      const matchesQuery = !query || textContent.includes(query);
+
+      if (matchesFilter && matchesQuery) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    const emptyNotice = document.getElementById('empty-state-notice');
+    if (visibleCount === 0) {
+      emptyNotice.classList.remove('hidden');
+      emptyNotice.classList.add('flex');
+    } else {
+      emptyNotice.classList.add('hidden');
+      emptyNotice.classList.remove('flex');
+    }
+  }
+
+  function resetFilters() {
+    document.getElementById('concept-search').value = '';
+    const allBtn = document.querySelector('.filter-btn');
+    if (allBtn) setFilter('all', allBtn);
+  }
+
+  function toggleMentions(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('hidden');
+  }
+
+  function toggleMergeSelectMode() {
+    isMergeMode = !isMergeMode;
+    const checkboxes = document.querySelectorAll('.merge-checkbox');
+    const mergeBar = document.getElementById('merge-bar');
+    const btn = document.getElementById('btn-merge-action');
+
+    if (isMergeMode) {
+      checkboxes.forEach(cb => cb.classList.remove('hidden'));
+      mergeBar.classList.remove('hidden');
+      mergeBar.classList.add('flex');
+      btn.classList.add('bg-surface-container-highest');
+    } else {
+      checkboxes.forEach(cb => {
+        cb.classList.add('hidden');
+        cb.checked = false;
+      });
+      mergeBar.classList.add('hidden');
+      mergeBar.classList.remove('flex');
+      btn.classList.remove('bg-surface-container-highest');
+      selectedForMerge = [];
+      updateMergeSelection();
+    }
+  }
+
+  function updateMergeSelection() {
+    selectedForMerge = [];
+    document.querySelectorAll('.merge-checkbox:checked').forEach(cb => {
+      selectedForMerge.push(cb.getAttribute('data-term'));
+    });
+
+    const badge = document.getElementById('merge-count-badge');
+    if (selectedForMerge.length > 0) {
+      badge.textContent = selectedForMerge.length;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+
+  function cancelMergeMode() {
+    toggleMergeSelectMode();
+  }
+
+  function openMergeModal() {
+    if (selectedForMerge.length < 2) {
+      alert('병합하려면 최소 2개 이상의 개념을 체크박스로 선택해주세요.');
+      return;
+    }
+    const listEl = document.getElementById('merge-selection-list');
+    listEl.innerHTML = selectedForMerge.map((term, i) => `
+      <div class="flex items-center gap-2">
+        <span class="text-secondary font-bold">${i + 1}.</span>
+        <span class="text-primary">${term}</span>
+      </div>
+    `).join('');
+
+    document.getElementById('merge-target-name').value = selectedForMerge[0];
+    document.getElementById('merge-modal').showModal();
+  }
+
+  function closeMergeModal() {
+    document.getElementById('merge-modal').close();
+  }
+
+  function executeMerge() {
+    const targetName = document.getElementById('merge-target-name').value.trim();
+    if (!targetName) return;
+
+    alert(`"${targetName}" 개념으로 성공적으로 병합되었습니다. 출현 논문들이 통합 목록으로 연동됩니다.`);
+    closeMergeModal();
+    cancelMergeMode();
+  }
+
+  function openDrawer(title, status) {
+    document.getElementById('drawer-title').textContent = title;
+    
+    // Set checked status
+    const radio = document.querySelector(`input[name="drawer-status"][value="${status}"]`);
+    if (radio) radio.checked = true;
+
+    const drawer = document.getElementById('editor-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+
+    backdrop.classList.remove('hidden');
+    setTimeout(() => {
+      backdrop.classList.remove('opacity-0');
+      drawer.classList.remove('translate-x-full');
+    }, 10);
+  }
+
+  function closeDrawer() {
+    const drawer = document.getElementById('editor-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+
+    drawer.classList.add('translate-x-full');
+    backdrop.classList.add('opacity-0');
+    setTimeout(() => {
+      backdrop.classList.add('hidden');
+    }, 300);
+  }
+
+  function saveDrawerChanges() {
+    closeDrawer();
+  }
+
+  function handleQuickAdd(e) {
+    e.preventDefault();
+    const term = document.getElementById('quick-term').value.trim();
+    if (!term) return;
+
+    alert(`'${term}' 개념이 노트북 선반에 등록되었습니다.`);
+    document.getElementById('quick-term').value = '';
+    document.getElementById('quick-loc').value = '';
+  }
+
+  function quickUpdateStatus(btn, targetStatus) {
+    const card = btn.closest('.concept-card');
+    if (!card) return;
+    card.setAttribute('data-status', targetStatus);
+    filterCards();
+  }
+</script></main><footer class="w-full bg-paper-surface border-t border-paper-border py-space-lg"><div class="max-w-[1440px] mx-auto px-margin flex flex-col md:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm font-mono-cite text-mono-cite text-on-surface-variant"><span>S. Keshav 3-Pass Method Framework</span><span class="text-outline-variant">|</span><span>Optical &amp; Signal Processing Lab</span></div><div class="font-mono-cite text-mono-cite text-on-surface-variant">© 2024 PaperPass. Academic Minimalist Research System.</div></div></footer></body></html>
