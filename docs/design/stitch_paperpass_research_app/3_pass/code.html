@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>PaperPass — 3-pass 논문 읽기 노트</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "source-arxiv": "#dc2626", "outline-variant": "#c5c6cd", "primary-fixed": "#d8e3fb", "on-primary-fixed-variant": "#3c475a", "primary": "#091426", "secondary-container": "#316bf3", "surface-container-lowest": "#ffffff", "secondary-fixed": "#dbe1ff", "on-error": "#ffffff", "on-error-container": "#93000a", "surface-dim": "#cbdbf5", "source-ieee": "#2563eb", "source-other": "#475569", "inverse-primary": "#bcc7de", "on-surface-variant": "#45474c", "on-tertiary-fixed-variant": "#00504a", "status-understood-bg": "#dcfce7", "tertiary": "#001816", "surface-tint": "#545f73", "on-tertiary-container": "#469e95", "on-tertiary": "#ffffff", "secondary-fixed-dim": "#b4c5ff", "surface-container": "#e5eeff", "tertiary-fixed": "#9cf2e8", "on-secondary": "#ffffff", "paper-canvas": "#f8fafc", "on-background": "#0b1c30", "on-primary-fixed": "#111c2d", "primary-fixed-dim": "#bcc7de", "on-secondary-fixed-variant": "#003ea8", "secondary": "#0051d5", "error": "#ba1a1a", "inverse-surface": "#213145", "pass-step-active": "#0f172a", "outline": "#75777d", "status-unknown": "#d97706", "on-surface": "#0b1c30", "paper-border": "#e2e8f0", "background": "#f8f9ff", "paper-surface": "#ffffff", "pass-step-complete": "#2563eb", "surface-variant": "#d3e4fe", "surface": "#f8f9ff", "on-primary-container": "#8590a6", "surface-container-highest": "#d3e4fe", "source-arxiv-bg": "#fee2e2", "source-other-bg": "#f1f5f9", "primary-container": "#1e293b", "surface-container-high": "#dce9ff", "inverse-on-surface": "#eaf1ff", "status-understood": "#16a34a", "surface-container-low": "#eff4ff", "on-tertiary-fixed": "#00201d", "on-primary": "#ffffff", "error-container": "#ffdad6", "source-scholar": "#059669", "status-unknown-bg": "#fef3c7", "tertiary-fixed-dim": "#80d5cb", "surface-bright": "#f8f9ff", "status-lookup": "#ca8a04", "on-secondary-fixed": "#00174b", "source-ieee-bg": "#dbeafe", "tertiary-container": "#002f2b", "on-secondary-container": "#fefcff", "source-scholar-bg": "#d1fae5", "pass-step-pending": "#cbd5e1", "status-lookup-bg": "#fef9c3" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-2xl": "3rem", "space-md": "1rem", "margin": "2.5rem", "gutter-split": "2rem", "space-xl": "2rem", "space-2xs": "0.125rem", "gutter": "1.5rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-lg": [ "Newsreader" ], "mono-cite": [ "JetBrains Mono" ], "mono-code": [ "JetBrains Mono" ], "title-md": [ "Inter" ], "body-lg": [ "Inter" ], "body-md": [ "Inter" ], "headline-md": [ "Newsreader" ], "body-sm": [ "Inter" ], "title-lg": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Newsreader" ] }, "fontSize": { "headline-lg": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "mono-cite": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.01em", "fontWeight": "500" } ], "mono-code": [ "0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ], "title-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "body-lg": [ "1rem", { "lineHeight": "1.625rem", "fontWeight": "400" } ], "body-md": [ "0.875rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "headline-md": [ "1.375rem", { "lineHeight": "1.875rem", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ], "title-lg": [ "1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-xl": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ] } } } }</script></head><body class="bg-paper-canvas font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-paper-surface border-b border-paper-border shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-[1440px] mx-auto px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="PaperPass Academic Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrB9mw9h_TfiMeFwOufktEfSefSJnXzP5llZfStr0mzDG0Lcrt_C-m8jXJa1DX7XjOesl8Isoyya2jXqgZ7svgPz0rqOgX5r0mHpc2sf5jqTJl99OPJvZUhfJ18gj8QsPuhVyLCOZtX-FU4bp8o36TkoFMlGxnijrefStrW7eqdhwcmXAt2p8oGHrHgnBSXvOxIi_PjcPK-jsQLPBl5vmplh84mMqsnTy2a-8aaW-ctv"/><div class="flex flex-col"><span class="font-headline-md text-headline-md text-primary leading-tight">PaperPass</span><span class="font-mono-cite text-mono-cite text-on-surface-variant uppercase tracking-wider">3-Pass Paper Note</span></div></div><nav class="flex items-center gap-space-xs ml-space-sm" data-active-classes="bg-surface-container-high text-primary font-semibold rounded-lg"><a class="px-space-sm py-space-xs font-title-md text-title-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="paper-list" href="#">논문 목록</a><a class="px-space-sm py-space-xs font-title-md text-title-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="concept-notebook" href="#">개념 노트</a><a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-surface-container-high text-primary font-semibold rounded-lg" data-path="reading-workspace" href="#">현재 리딩</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-low border border-paper-border"><span class="inline-flex items-center gap-1 font-mono-cite text-mono-cite text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>읽는 중 <strong class="text-primary font-semibold">4</strong></span><span class="text-outline-variant font-mono-cite text-mono-cite">·</span><span class="inline-flex items-center gap-1 font-mono-cite text-mono-cite text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-status-understood"></span>완료 <strong class="text-primary font-semibold">2</strong></span><span class="text-outline-variant font-mono-cite text-mono-cite">·</span><span class="inline-flex items-center gap-1 font-mono-cite text-mono-cite text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-status-unknown"></span>미해결 개념 <strong class="text-error font-semibold">7</strong></span></div><div class="flex items-center gap-space-sm"><button class="hidden sm:inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-lg border border-paper-border bg-paper-surface hover:bg-paper-canvas text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">menu_book</span><span class="font-label-md text-label-md">가이드</span></button><button class="inline-flex items-center gap-1.5 px-space-md py-space-xs rounded-lg bg-primary-container hover:bg-primary text-on-primary font-title-md text-title-md transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span>논문 추가</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-paper-canvas min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Command & Breadcrumb Surface -->
+<div class="w-full bg-surface-container-low">
+<div class="max-w-[1440px] mx-auto px-margin py-space-md">
+<!-- Breadcrumb row & Auto-save / Global status -->
+<div class="flex items-center justify-between gap-space-md mb-space-sm">
+<div class="flex items-center gap-space-xs font-mono-cite text-mono-cite text-on-surface-variant truncate">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[15px]">arrow_back</span>
+<span>논문 목록</span>
+</a>
+<span class="text-outline-variant font-mono-code">/</span>
+<span class="text-primary font-medium truncate max-w-xl">Deep Learning-Based Nonlinear Equalization for 112-Gb/s PAM4 IM/DD...</span>
+</div>
+<div class="flex items-center gap-space-md shrink-0">
+<div class="flex items-center gap-1.5 px-space-sm py-1 bg-surface-container-lowest rounded-full shadow-sm">
+<span class="inline-block w-2 h-2 rounded-full bg-status-understood animate-pulse"></span>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">자동 저장됨 ✓ (1초 전)</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">pending</span>
+<span>2차 완료 대기</span>
+</div>
+</div>
+</div>
+<!-- Main Paper Title Banner & Key Actions -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md pt-space-xs pb-space-sm">
+<div class="space-y-1.5 max-w-4xl">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="px-2 py-0.5 rounded bg-source-ieee-bg text-source-ieee font-mono-cite text-mono-cite font-semibold tracking-wide">
+              IEEE Xplore
+            </span>
+<span class="font-mono-code text-mono-code text-on-surface-variant">
+              J. Kim, H. Park, S. Choi et al. · 2024 · IEEE Photonics Tech. Lett. (Vol. 36, No. 4)
+            </span>
+<span class="font-mono-code text-mono-code text-outline-variant">DOI: 10.1109/LPT.2024.3361890</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+            Deep Learning-Based Nonlinear Equalization for 112-Gb/s PAM4 IM/DD Optical Interconnects
+          </h1>
+</div>
+<!-- Quick Top Action Group -->
+<div class="flex items-center gap-space-xs shrink-0">
+<a class="inline-flex items-center gap-1.5 px-space-sm py-2 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all font-title-md text-title-md shadow-sm" href="#">
+<span class="material-symbols-outlined text-[17px]">open_in_new</span>
+<span>원문 열기</span>
+</a>
+<button class="inline-flex items-center gap-1.5 px-space-sm py-2 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all font-title-md text-title-md shadow-sm" onclick="window.print()" type="button">
+<span class="material-symbols-outlined text-[17px]">print</span>
+<span>인쇄용 워크시트 출력</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 3-Pass Stepped Visual Progress Navigation -->
+<div class="w-full bg-surface-container-lowest shadow-sm">
+<div class="max-w-[1440px] mx-auto px-margin">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+<!-- Pass 1: Complete -->
+<div class="flex items-center gap-space-sm py-3.5 px-space-md cursor-pointer transition-all bg-surface-container-lowest hover:bg-surface-container-low group">
+<div class="w-7 h-7 rounded-full bg-pass-step-complete text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="min-w-0 flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-mono-cite text-mono-cite font-semibold text-pass-step-complete">PASS 1</span>
+<span class="font-title-md text-title-md text-primary font-medium">1차: 훑기 (완료 ✓)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">5~10분 · 초록·결론·그림 개요 파악 완료</p>
+</div>
+</div>
+<!-- Pass 2: Active / In-progress -->
+<div class="flex items-center gap-space-sm py-3.5 px-space-md bg-surface-container-high transition-all relative">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed animate-ping"></span>
+</div>
+<div class="min-w-0 flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-mono-cite text-mono-cite font-semibold text-secondary">PASS 2 · ACTIVE</span>
+<span class="font-title-md text-title-md text-primary font-bold">2차: 이해 (작성 중 ●)</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary font-medium truncate">약 1시간 · 본문 메커니즘 &amp; 성능 실증 분석</p>
+</div>
+<!-- Indicator active bar -->
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"></div>
+</div>
+<!-- Pass 3: Pending -->
+<div class="flex items-center gap-space-sm py-3.5 px-space-md cursor-pointer transition-all bg-surface-container-lowest hover:bg-surface-container-low group opacity-75">
+<div class="w-7 h-7 rounded-full bg-pass-step-pending text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">radio_button_unchecked</span>
+</div>
+<div class="min-w-0 flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-mono-cite text-mono-cite font-medium text-on-surface-variant">PASS 3</span>
+<span class="font-title-md text-title-md text-on-surface-variant">3차: 깊이 (대기 ○)</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline-variant truncate">수 시간 · 가설 재구축, 재현성 및 한계 도출</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dual-Panel Workspace (70% Left Workspace / 30% Right Sticky Shelf) -->
+<div class="w-full max-w-[1440px] mx-auto px-margin py-space-xl">
+<div class="flex flex-col lg:flex-row gap-gutter-split items-start">
+<!-- ================= LEFT / MAIN CONTENT AREA (70%) ================= -->
+<section class="w-full lg:w-[68%] flex flex-col gap-space-lg">
+<!-- Pass 2 Methodology Guide Intro -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">psychology</span>
+<span class="font-mono-cite text-mono-cite text-secondary uppercase font-bold tracking-wider">Keshav 2nd Pass Strategy</span>
+</div>
+<span class="font-mono-code text-mono-code text-on-surface-variant">신호처리 &amp; 광통신 특화 가이드</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+            세부 수학적 증명보다 <strong>제안 기법의 입력-처리-출력 파이프라인</strong>, <strong>기존 baseline 대비 성능 우위 지표</strong>, 그리고 <strong>검증된 물리적 실험 환경</strong>을 규명하는 데 집중하세요.
+          </p>
+</div>
+<!-- 5 Structured Guided Question Cards -->
+<div class="flex flex-col gap-space-lg">
+<!-- Question 1 -->
+<article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm transition-all hover:shadow-md">
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-mono-code text-mono-code flex items-center justify-center font-semibold">Q1</span>
+<h2 class="font-title-lg text-title-lg text-primary">제안 기법을 내 말로 설명하면? (블록도 순서대로)</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-status-understood-bg text-status-understood font-mono-cite text-mono-cite font-semibold">작성완료</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+              송신부, 광채널 왜곡, 수신부 신호처리 블록의 데이터 흐름 관점에서 핵심 처리 단계를 요약하세요.
+            </p>
+<div class="relative">
+<textarea class="w-full p-space-sm rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none transition-colors leading-relaxed resize-y" rows="4">수신단 ADC 직후 기존 51-tap FFE/DFE 대신 3계층 BiLSTM 신경망을 배치하여 PAM4 신호의 송수신기 비선형성 및 수신 포토다이오드의 제곱법칙(Square-law) 비선형성을 보상함. 과거 심볼 16개와 미래 심볼 8개를 윈도우 슬라이딩 입력으로 받아 심볼간 간섭(ISI)과 채널 비선형 왜곡을 동시에 등화한 뒤 Softmax 분류기로 4단계 진폭 판정을 수행함.</textarea>
+<div class="mt-2 flex items-center justify-between text-on-surface-variant font-mono-cite text-mono-cite">
+<span>핵심 키워드: BiLSTM, Square-law 비선형성, Softmax 4-Level</span>
+<span>218자 작성</span>
+</div>
+</div>
+</article>
+<!-- Question 2 -->
+<article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm transition-all hover:shadow-md">
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-mono-code text-mono-code flex items-center justify-center font-semibold">Q2</span>
+<h2 class="font-title-lg text-title-lg text-primary">비교 대상(Baseline)은 무엇인가?</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-status-understood-bg text-status-understood font-mono-cite text-mono-cite font-semibold">작성완료</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+              저자가 자신의 기법이 우수함을 입증하기 위해 선택한 기존 산업 표준 또는 직전 SOTA 알고리즘은 무엇인가요?
+            </p>
+<div class="relative">
+<textarea class="w-full p-space-sm rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none transition-colors leading-relaxed resize-y" rows="2">전통적인 선형 51-tap FFE + 15-tap DFE 구조 및 기존 비선형 보상 표준인 2차 Volterra 필터(2nd-order Volterra Nonlinear Equalizer, VNE).</textarea>
+<div class="mt-2 flex items-center justify-between text-on-surface-variant font-mono-cite text-mono-cite">
+<span>비교군 2개 식별: 선형(FFE/DFE) vs 비선형(2nd Volterra)</span>
+<span>88자 작성</span>
+</div>
+</div>
+</article>
+<!-- Question 3 -->
+<article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm transition-all hover:shadow-md">
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-mono-code text-mono-code flex items-center justify-center font-semibold">Q3</span>
+<h2 class="font-title-lg text-title-lg text-primary">핵심 성능 지표(Metrics)는?</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-status-understood-bg text-status-understood font-mono-cite text-mono-cite font-semibold">작성완료</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+              주요 평가 메트릭 수치와 하드웨어 연산 복잡도(파라미터 수, FLOPs 등)를 기록하세요.
+            </p>
+<div class="space-y-space-sm">
+<textarea class="w-full p-space-sm rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none transition-colors leading-relaxed resize-y" rows="2">BER (HD-FEC 한계 3.8e-3 기준 달성 여부), EVM (%), 복잡도(학습 파라미터 수: 제안 기법 14.2k vs 2차 Volterra 32.1k — 약 55.7% 연산량 감축).</textarea>
+<!-- Mini Metric Viz Inline SVG -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="flex flex-col">
+<span class="font-mono-cite text-mono-cite text-on-surface-variant uppercase">Target BER</span>
+<span class="font-mono-code text-mono-code font-bold text-primary">3.8 × 10⁻³ (HD-FEC)</span>
+</div>
+<div class="h-6 w-px bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-mono-cite text-mono-cite text-on-surface-variant uppercase">RX Sensitivity</span>
+<span class="font-mono-code text-mono-code font-bold text-status-understood">+2.1 dB Gain</span>
+</div>
+</div>
+<!-- Minimalist inline Spark Bar comparing parameter counts -->
+<div class="flex items-center gap-space-sm shrink-0 w-full md:w-auto">
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">Complexity (Params)</span>
+<div class="flex items-center gap-1.5">
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">Volterra</span>
+<div class="w-24 h-2 rounded bg-surface-container-highest overflow-hidden">
+<div class="w-full h-full bg-source-other"></div>
+</div>
+<span class="font-mono-cite text-mono-cite font-semibold text-secondary">BiLSTM</span>
+<div class="w-24 h-2 rounded bg-surface-container-highest overflow-hidden">
+<div class="w-[44%] h-full bg-secondary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Question 4 -->
+<article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm transition-all hover:shadow-md">
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-mono-code text-mono-code flex items-center justify-center font-semibold">Q4</span>
+<h2 class="font-title-lg text-title-lg text-primary">실험·시뮬레이션 조건은?</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-status-understood-bg text-status-understood font-mono-cite text-mono-cite font-semibold">작성완료</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+              실험 테스트베드 및 광학 링크 매개변수 (전송속도, 변조형식, 파장, 거리, 컴포넌트 스펙).
+            </p>
+<div class="space-y-space-sm">
+<textarea class="w-full p-space-sm rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none transition-colors leading-relaxed resize-y" rows="2">56 Gbaud (112 Gb/s) PAM4 변조, 10 km Standard Single-Mode Fiber (SSMF) 스풀 전송, 1550 nm DFB 레이저, 25 GHz 대역폭 PIN-PD 광수신기 및 8-bit 100 GSa/s 실시간 오실로스코프 샘플링.</textarea>
+<!-- Spec Grid Chips -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 font-mono-code text-mono-code">
+<div class="px-2.5 py-1.5 rounded bg-surface-container-low flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-mono-cite uppercase">Line Rate</span>
+<span class="font-semibold text-primary">112 Gb/s (PAM4)</span>
+</div>
+<div class="px-2.5 py-1.5 rounded bg-surface-container-low flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-mono-cite uppercase">Transmission</span>
+<span class="font-semibold text-primary">10 km SSMF</span>
+</div>
+<div class="px-2.5 py-1.5 rounded bg-surface-container-low flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-mono-cite uppercase">Wavelength</span>
+<span class="font-semibold text-primary">1550 nm DFB</span>
+</div>
+<div class="px-2.5 py-1.5 rounded bg-surface-container-low flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-mono-cite uppercase">Detector</span>
+<span class="font-semibold text-primary">25 GHz PIN-PD</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Question 5: Most Crucial Figure -->
+<article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm transition-all hover:shadow-md">
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-mono-code text-mono-code flex items-center justify-center font-semibold">Q5</span>
+<h2 class="font-title-lg text-title-lg text-primary">가장 중요한 그림 1개와, 그 그림이 보여주는 것은?</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-status-understood-bg text-status-understood font-mono-cite text-mono-cite font-semibold">작성완료</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+              논문의 핵심 주장을 단 하나의 도표로 증명하는 그래프/다이어그램의 번호와 해석.
+            </p>
+<div class="space-y-space-sm">
+<textarea class="w-full p-space-sm rounded-lg bg-surface-container-low text-primary font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none transition-colors leading-relaxed resize-y" rows="3">그림 4 (BER vs. ROP 수신 감도 곡선): 제안한 BiLSTM 등화기가 10 km 전송 후에도 2차 Volterra 대비 약 2.1 dB의 수신 광 파워(ROP) 감도 개선을 보이며, 심각한 대역폭 제한 왜곡 속에서도 유일하게 7% HD-FEC 문턱값(3.8e-3) 이하의 무오류 복원을 안정적으로 만족함을 직접 증명함.</textarea>
+<!-- Synthetic SVG Scientific Chart for Figure 4 Preview -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col sm:flex-row items-center gap-space-md">
+<div class="w-full sm:w-64 h-36 bg-surface-container-lowest rounded p-2 flex flex-col justify-between shrink-0 shadow-inner">
+<div class="flex items-center justify-between text-[11px] font-mono-code text-on-surface-variant">
+<span>Fig. 4: BER vs. ROP (dBm)</span>
+<span class="text-source-ieee font-bold">10 km SSMF</span>
+</div>
+<!-- Inline Vector Chart Curves -->
+<svg class="w-full h-24 overflow-visible" viewbox="0 0 220 90">
+<!-- Grid Lines -->
+<line stroke="#e2e8f0" stroke-dasharray="2,2" x1="25" x2="210" y1="10" y2="10"></line>
+<line stroke="#ba1a1a" stroke-dasharray="3,2" stroke-opacity="0.5" x1="25" x2="210" y1="45" y2="45"></line>
+<line stroke="#e2e8f0" stroke-dasharray="2,2" x1="25" x2="210" y1="75" y2="75"></line>
+<!-- HD-FEC Label -->
+<text fill="#ba1a1a" font-family="JetBrains Mono" font-size="8" x="30" y="42">FEC Threshold (3.8e-3)</text>
+<!-- FFE Line (Fails above threshold) -->
+<path d="M 30 20 Q 90 28, 205 38" fill="none" stroke="#75777d" stroke-dasharray="4,2" stroke-width="1.8"></path>
+<!-- Volterra Curve -->
+<path d="M 30 18 Q 110 32, 205 52" fill="none" stroke="#ca8a04" stroke-width="2"></path>
+<!-- BiLSTM Proposed Curve (Crosses FEC deeply) -->
+<path d="M 30 15 Q 120 40, 205 78" fill="none" stroke="#2563eb" stroke-width="2.5"></path>
+<!-- Data points -->
+<circle cx="205" cy="78" fill="#2563eb" r="3"></circle>
+<circle cx="205" cy="52" fill="#ca8a04" r="3"></circle>
+<circle cx="205" cy="38" fill="#75777d" r="3"></circle>
+</svg>
+<div class="flex items-center justify-between text-[9px] font-mono-code text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="w-2 h-0.5 bg-source-ieee inline-block"></span> Proposed BiLSTM</span>
+<span class="flex items-center gap-1"><span class="w-2 h-0.5 bg-status-lookup inline-block"></span> Volterra</span>
+<span class="flex items-center gap-1"><span class="w-2 h-0.5 bg-outline inline-block"></span> FFE</span>
+</div>
+</div>
+<div class="space-y-1">
+<div class="font-title-md text-title-md text-primary font-semibold">도표 해석 포인트 메모</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                    수신 전력 -8 dBm 지점에서 FFE 단독 구조는 바닥 오차(Error Floor)에 도달하여 FEC 기준을 넘지 못함. 제안 기법은 -10.2 dBm에서 HD-FEC 문턱에 도달하여 2.1 dB의 파워 버짓(Power Budget) 여유도를 확보함.
+                  </p>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Pass Transition Action Footer -->
+<div class="p-space-lg rounded-xl bg-surface-container-high flex flex-col sm:flex-row items-center justify-between gap-space-md mt-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-status-understood text-[28px]">verified</span>
+<div>
+<div class="font-title-md text-title-md text-primary font-bold">2차 통독 핵심 질문 5개 모두 입력됨</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">이제 3차 통독으로 넘어가 재현성 검토 및 연구 아이디어 확장을 시작할 수 있습니다.</p>
+</div>
+</div>
+<button class="w-full sm:w-auto px-space-lg py-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-title-md text-title-md transition-all shadow-md flex items-center justify-center gap-2 group shrink-0" type="button">
+<span>2차 읽기 완료하고 3차로 이동</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- ================= RIGHT / STICKY COMPANION CONCEPT PANEL (30%) ================= -->
+<aside class="w-full lg:w-[32%] lg:sticky lg:top-24 flex flex-col gap-space-md">
+<!-- Shelf Header & Mini Add Trigger -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">bookmarks</span>
+<h3 class="font-title-lg text-title-lg text-primary font-bold">전제 개념 노트</h3>
+<span class="px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-mono-cite text-mono-cite font-bold">
+                이 논문 4개
+              </span>
+</div>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-low hover:bg-surface-container text-primary font-label-md text-label-md transition-colors" id="toggleAddConceptBtn" type="button">
+<span class="material-symbols-outlined text-[15px]">add</span>
+<span>개념</span>
+</button>
+</div>
+<!-- Quick Add Drawer / Mini Form -->
+<form class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-2" id="quickConceptForm">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-mono-cite text-mono-cite font-semibold">신규 전제 개념 빠른 추가</span>
+<span class="font-mono-cite text-mono-cite text-outline-variant">단축키: Alt+N</span>
+</div>
+<input class="w-full px-space-sm py-1.5 rounded bg-surface-container-lowest text-primary font-body-sm text-body-sm placeholder:text-outline-variant focus:outline-none" placeholder="개념명 (예: Volterra 비선형성)" type="text"/>
+<input class="w-full px-space-sm py-1.5 rounded bg-surface-container-lowest text-primary font-body-sm text-body-sm placeholder:text-outline-variant focus:outline-none" placeholder="발견 위치 (예: Sec. II-B, 식 3)" type="text"/>
+<button class="w-full py-1.5 mt-1 rounded bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors flex items-center justify-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[15px]">bolt</span>
+<span>빠르게 적고 계속 읽기</span>
+</button>
+</form>
+<!-- Recorded Concept Shelf List -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<!-- Concept Card 1: IM/DD (Understood) -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex flex-col gap-1.5 group">
+<div class="flex items-start justify-between gap-2">
+<span class="font-title-md text-title-md text-primary font-semibold leading-snug">
+                  IM/DD (Intensity Modulation / Direct Detection)
+                </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-understood-bg text-status-understood font-mono-cite text-mono-cite font-bold shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-status-understood"></span>
+                  이해함
+                </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono-cite text-mono-cite">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">location_on</span>
+                  Sec. I (서론)
+                </span>
+<span class="text-outline-variant">·</span>
+<span>광통신 기초</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1 bg-surface-container-lowest p-2 rounded leading-relaxed">
+                빛의 세기 자체를 변조하고 포토다이오드로 세기만 검출하는 가장 단순하고 저비용인 광통신 방식. 코히런트(Coherent) 대비 위상 정보는 버리지만 데이터센터 단거리 링크 표준임.
+              </p>
+</div>
+<!-- Concept Card 2: Volterra 비선형성 (Looked up) -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex flex-col gap-1.5 group">
+<div class="flex items-start justify-between gap-2">
+<span class="font-title-md text-title-md text-primary font-semibold leading-snug">
+                  Volterra 비선형성 (Volterra Kernel)
+                </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-lookup-bg text-status-lookup font-mono-cite text-mono-cite font-bold shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-status-lookup"></span>
+                  찾아봄
+                </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono-cite text-mono-cite">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">location_on</span>
+                  Sec. II-B, 식 (4)
+                </span>
+<span class="text-outline-variant">·</span>
+<span>DSP 모델</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1 bg-surface-container-lowest p-2 rounded leading-relaxed">
+                입력 신호의 고차 거듭제곱과 시간 지연 곱을 사용해 메모리 비선형 왜곡을 근사하는 테일러 급수의 다차원 확장 모델. 차수 및 메모리 길이가 늘면 커널 수가 폭발함.
+              </p>
+</div>
+<!-- Concept Card 3: ISI (Unknown) -->
+<div class="p-space-sm rounded-lg bg-status-unknown-bg/40 hover:bg-status-unknown-bg/60 transition-colors flex flex-col gap-1.5 group">
+<div class="flex items-start justify-between gap-2">
+<span class="font-title-md text-title-md text-primary font-semibold leading-snug">
+                  ISI (Intersymbol Interference)
+                </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-unknown-bg text-status-unknown font-mono-cite text-mono-cite font-bold shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-status-unknown"></span>
+                  모름
+                </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono-cite text-mono-cite">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">location_on</span>
+                  Sec. III-A, 단락 2
+                </span>
+<span class="text-outline-variant">·</span>
+<span>통신 채널</span>
+</div>
+<div class="mt-1 bg-surface-container-lowest/80 p-2.5 rounded flex items-center justify-between cursor-pointer hover:bg-surface-container-lowest transition-colors">
+<span class="font-body-sm text-body-sm text-status-unknown font-medium">아직 미작성 · 내 말로 설명 추가하기</span>
+<span class="material-symbols-outlined text-status-unknown text-[16px]">edit_note</span>
+</div>
+</div>
+<!-- Concept Card 4: PAM4 (Understood) -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex flex-col gap-1.5 group">
+<div class="flex items-start justify-between gap-2">
+<span class="font-title-md text-title-md text-primary font-semibold leading-snug">
+                  PAM4 (4-Level Pulse Amplitude Modulation)
+                </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-status-understood-bg text-status-understood font-mono-cite text-mono-cite font-bold shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-status-understood"></span>
+                  이해함
+                </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono-cite text-mono-cite">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">location_on</span>
+                  Title &amp; Sec. II
+                </span>
+<span class="text-outline-variant">·</span>
+<span>변조 방식</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1 bg-surface-container-lowest p-2 rounded leading-relaxed">
+                한 심볼에 2비트를 4개의 전압 레벨(00, 01, 11, 10)로 전송하는 진폭 변조 방식. NRZ 대비 동일 대역폭에서 2배 전송률을 내지만 SNR 마진이 약 4.8 dB 깎임.
+              </p>
+</div>
+</div>
+<!-- Bottom Master Shelf Navigator -->
+<a class="pt-space-xs flex items-center justify-between font-title-md text-title-md text-secondary hover:text-primary transition-colors font-medium" href="#">
+<span>전체 개념 노트 모아보기 (7개)</span>
+<span class="material-symbols-outlined text-[18px]">arrow_right_alt</span>
+</a>
+</div>
+<!-- Academic Quote / Micro Tip -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-outline-variant text-[20px] shrink-0 mt-0.5">lightbulb</span>
+<div class="flex flex-col gap-1">
+<span class="font-mono-cite text-mono-cite font-bold text-on-surface-variant uppercase">Keshav Reading Tip</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              "2차 통독 도중 막히는 수학적 전개는 건너뛰되, 생소한 통신 용어는 오른쪽 패널에 바로 박제해 두세요. 3차 통독 전 배경지식 갭을 메우는 핵심 자산이 됩니다."
+            </p>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<script>
+  // Simple interaction for the quick concept mini form
+  const addBtn = document.getElementById('toggleAddConceptBtn');
+  const conceptForm = document.getElementById('quickConceptForm');
+  if (addBtn && conceptForm) {
+    addBtn.addEventListener('click', () => {
+      conceptForm.classList.toggle('hidden');
+      const firstInput = conceptForm.querySelector('input');
+      if (firstInput && !conceptForm.classList.contains('hidden')) {
+        firstInput.focus();
+      }
+    });
+  }
+</script></main><footer class="w-full bg-paper-surface border-t border-paper-border py-space-lg"><div class="max-w-[1440px] mx-auto px-margin flex flex-col md:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm font-mono-cite text-mono-cite text-on-surface-variant"><span>S. Keshav 3-Pass Method Framework</span><span class="text-outline-variant">|</span><span>Optical &amp; Signal Processing Lab</span></div><div class="font-mono-cite text-mono-cite text-on-surface-variant">© 2024 PaperPass. Academic Minimalist Research System.</div></div></footer></body></html>

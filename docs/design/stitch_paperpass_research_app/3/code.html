@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_blank" name="shell-type"/><title>PaperPass — Academic Workspace</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "source-arxiv": "#dc2626", "outline-variant": "#c5c6cd", "primary-fixed": "#d8e3fb", "on-primary-fixed-variant": "#3c475a", "primary": "#091426", "secondary-container": "#316bf3", "surface-container-lowest": "#ffffff", "secondary-fixed": "#dbe1ff", "on-error": "#ffffff", "on-error-container": "#93000a", "surface-dim": "#cbdbf5", "source-ieee": "#2563eb", "source-other": "#475569", "inverse-primary": "#bcc7de", "on-surface-variant": "#45474c", "on-tertiary-fixed-variant": "#00504a", "status-understood-bg": "#dcfce7", "tertiary": "#001816", "surface-tint": "#545f73", "on-tertiary-container": "#469e95", "on-tertiary": "#ffffff", "secondary-fixed-dim": "#b4c5ff", "surface-container": "#e5eeff", "tertiary-fixed": "#9cf2e8", "on-secondary": "#ffffff", "paper-canvas": "#f8fafc", "on-background": "#0b1c30", "on-primary-fixed": "#111c2d", "primary-fixed-dim": "#bcc7de", "on-secondary-fixed-variant": "#003ea8", "secondary": "#0051d5", "error": "#ba1a1a", "inverse-surface": "#213145", "pass-step-active": "#0f172a", "outline": "#75777d", "status-unknown": "#d97706", "on-surface": "#0b1c30", "paper-border": "#e2e8f0", "background": "#f8f9ff", "paper-surface": "#ffffff", "pass-step-complete": "#2563eb", "surface-variant": "#d3e4fe", "surface": "#f8f9ff", "on-primary-container": "#8590a6", "surface-container-highest": "#d3e4fe", "source-arxiv-bg": "#fee2e2", "source-other-bg": "#f1f5f9", "primary-container": "#1e293b", "surface-container-high": "#dce9ff", "inverse-on-surface": "#eaf1ff", "status-understood": "#16a34a", "surface-container-low": "#eff4ff", "on-tertiary-fixed": "#00201d", "on-primary": "#ffffff", "error-container": "#ffdad6", "source-scholar": "#059669", "status-unknown-bg": "#fef3c7", "tertiary-fixed-dim": "#80d5cb", "surface-bright": "#f8f9ff", "status-lookup": "#ca8a04", "on-secondary-fixed": "#00174b", "source-ieee-bg": "#dbeafe", "tertiary-container": "#002f2b", "on-secondary-container": "#fefcff", "source-scholar-bg": "#d1fae5", "pass-step-pending": "#cbd5e1", "status-lookup-bg": "#fef9c3" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-2xl": "3rem", "space-md": "1rem", "margin": "2.5rem", "gutter-split": "2rem", "space-xl": "2rem", "space-2xs": "0.125rem", "gutter": "1.5rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-lg": [ "Newsreader" ], "mono-cite": [ "JetBrains Mono" ], "mono-code": [ "JetBrains Mono" ], "title-md": [ "Inter" ], "body-lg": [ "Inter" ], "body-md": [ "Inter" ], "headline-md": [ "Newsreader" ], "body-sm": [ "Inter" ], "title-lg": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Newsreader" ] }, "fontSize": { "headline-lg": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "mono-cite": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.01em", "fontWeight": "500" } ], "mono-code": [ "0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ], "title-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "body-lg": [ "1rem", { "lineHeight": "1.625rem", "fontWeight": "400" } ], "body-md": [ "0.875rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "headline-md": [ "1.375rem", { "lineHeight": "1.875rem", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ], "title-lg": [ "1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-xl": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ] } } } }</script></head><body class="bg-paper-canvas font-body-md text-body-md text-on-surface antialiased"><main class="w-full min-h-screen flex items-center justify-center p-margin"><div class="flex flex-col w-full items-center justify-start">
+<!-- Screen-Only Action Control Bar -->
+<div class="w-full max-w-5xl mb-space-lg print:hidden">
+<div class="bg-surface-container-high text-on-surface rounded-xl p-space-md shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-secondary text-2xl flex-shrink-0">print</span>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-md text-title-md truncate">A4 3차 심층 읽기 워크시트</span>
+<span class="bg-surface-container-lowest font-mono-cite text-mono-cite px-2 py-0.5 rounded text-on-surface-variant">손글씨 수기 기록용</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">브라우저 인쇄 단축키(Ctrl+P / Cmd+P)로 즉시 여백 없는 흑백 A4 레이아웃으로 출력 가능합니다.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0 w-full md:w-auto justify-end">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-variant transition-colors flex items-center gap-1" onclick="window.close()" type="button">
+<span class="material-symbols-outlined text-sm">close</span>
+          워크시트 닫기
+        </button>
+<button class="px-space-lg py-1.5 rounded-lg bg-primary text-on-primary font-title-md text-title-md hover:bg-primary-container transition-all flex items-center gap-1.5 shadow-sm" onclick="window.print()" type="button">
+<span class="material-symbols-outlined text-sm">print</span>
+          인쇄 대화상자 열기 (Print)
+        </button>
+</div>
+</div>
+</div>
+<!-- A4 Print Container (Single Sheet Flow) -->
+<div class="w-full max-w-[210mm] flex flex-col gap-space-2xl print:gap-0 print:w-full print:max-w-none text-primary print:text-black">
+<!-- ==================== PAGE 1 ==================== -->
+<section class="bg-surface-container-lowest p-[18mm] print:p-0 shadow-xl print:shadow-none min-h-[297mm] flex flex-col justify-between print:break-after-page rounded-lg print:rounded-none">
+<div class="flex flex-col gap-space-lg">
+<!-- Header Strip -->
+<div class="flex justify-between items-start pb-space-sm bg-surface-container-low p-space-md rounded print:bg-transparent print:p-0">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-lg text-headline-lg tracking-tight">PaperPass</span>
+<span class="font-mono-cite text-mono-cite uppercase px-1.5 py-0.5 rounded bg-surface-container-high print:bg-slate-100 text-on-surface">3-Pass Method</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant print:text-neutral-700 mt-1">심층 분석 워크시트 (Pass 3: Critical Analysis &amp; Reproducibility)</p>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="font-mono-code text-mono-code text-on-surface-variant">신호처리·광통신 연구실</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-outline">Lab Research Notebook</span>
+</div>
+</div>
+<!-- Meta Grid Box -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm print:shadow-none flex flex-col gap-space-sm bg-paper-canvas print:bg-white">
+<div class="flex items-baseline justify-between gap-space-md">
+<span class="font-mono-code text-mono-code text-outline flex-shrink-0">[Paper Title]</span>
+<span class="font-headline-md text-headline-md leading-tight text-right text-primary font-bold print:text-black">Deep Learning-Based Nonlinear Equalization for 112-Gb/s PAM4 IM/DD Optical Interconnects</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-space-lg gap-y-1 font-body-sm text-body-sm pt-space-xs bg-surface-container-lowest print:bg-transparent p-space-xs rounded">
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-code text-mono-code text-on-surface-variant font-medium">저자:</span>
+<span>J. Kim, H. Park, Y. Choi</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-code text-mono-code text-on-surface-variant font-medium">게재처 / 연도:</span>
+<span>IEEE Photonics Tech. Lett. (2024)</span>
+</div>
+<div class="flex items-center gap-space-xs col-span-2">
+<span class="font-mono-code text-mono-code text-on-surface-variant font-medium">DOI / Citation ID:</span>
+<span class="font-mono-cite text-mono-cite">10.1109/LPT.2024.3389102 · Ref-PAM4-EQ</span>
+</div>
+</div>
+<!-- Metadata Fill-in Slots -->
+<div class="grid grid-cols-2 gap-space-md pt-space-sm mt-space-xs bg-surface-container-low print:bg-slate-50 p-space-sm rounded">
+<div class="flex items-baseline gap-space-sm font-mono-code text-mono-code">
+<span class="text-on-surface-variant font-semibold">3차 읽기 분석 일자:</span>
+<span class="flex-grow text-center text-primary print:text-black font-semibold">2025년        월        일</span>
+</div>
+<div class="flex items-baseline gap-space-sm font-mono-code text-mono-code">
+<span class="text-on-surface-variant font-semibold">학부 연구생 성명:</span>
+<span class="flex-grow text-center text-primary print:text-black font-semibold">                                </span>
+</div>
+</div>
+</div>
+<!-- Section: 1차 & 2차 요약 핵심 박스 -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-pass-step-complete"></span>
+<h2 class="font-title-md text-title-md tracking-tight">1차·2차 통과 검토 요약 (Quick Reference Summary)</h2>
+</div>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">Pass 1 &amp; 2 Verified</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Pass 1 Survey Box -->
+<div class="bg-surface-container-low print:bg-white p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md uppercase text-secondary font-bold">1차 패스 (구조 훑기 요약)</span>
+<span class="font-mono-cite text-mono-cite bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">분류: 기법 제안</span>
+</div>
+<p class="font-body-sm text-body-sm leading-relaxed text-on-surface">
+<strong>핵심 기여도:</strong> 112-Gb/s 광 상호연결 시스템에서 BiLSTM 기반 비선형 등화기를 제안하여 Volterra 필터 대비 2.1 dB 수신 감도 향상 및 HD-FEC 한계(BER 3.8×10⁻³) 달성.
+                </p>
+</div>
+<div class="pt-2 mt-2 bg-surface-container-lowest print:bg-transparent p-1.5 rounded flex items-center justify-between font-mono-cite text-mono-cite text-on-surface-variant">
+<span>핵심 수식: 식 (4) 양방향 은닉 상태</span>
+<span>도표: Fig. 5 BER 곡선</span>
+</div>
+</div>
+<!-- Pass 2 Mechanics Box -->
+<div class="bg-surface-container-low print:bg-white p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md uppercase text-secondary font-bold">2차 패스 (동작 원리 요약)</span>
+<span class="font-mono-cite text-mono-cite bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">비교군 설정 완료</span>
+</div>
+<p class="font-body-sm text-body-sm leading-relaxed text-on-surface">
+<strong>실험 조건 &amp; 베이스라인:</strong> 56GBaud PAM4 신호, 10km SSMF 전송, 1550nm DFB 레이저 사용. 전통적인 51-tap 선형 FFE/DFE 및 2차 Volterra 필터와 직접 연산량 대비 성능 비교.
+                </p>
+</div>
+<div class="pt-2 mt-2 bg-surface-container-lowest print:bg-transparent p-1.5 rounded flex items-center justify-between font-mono-cite text-mono-cite text-on-surface-variant">
+<span>샘플 레이트: 1-SpS (ADC 완화)</span>
+<span>은닉 노드 크기: H=32</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: 미해결 전제 개념 체크리스트 -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-status-unknown"></span>
+<h2 class="font-title-md text-title-md tracking-tight">전제 개념 점검 체크리스트 (손글씨 검증 필드)</h2>
+</div>
+<span class="font-mono-cite text-mono-cite text-status-unknown font-semibold">미해결 항목 3개</span>
+</div>
+<div class="bg-surface-container-low print:bg-white p-space-md rounded-lg flex flex-col gap-space-sm">
+<!-- Concept Item 1 -->
+<div class="p-space-sm bg-surface-container-lowest print:bg-white rounded flex items-start gap-space-md shadow-sm print:shadow-none">
+<div class="pt-0.5">
+<div class="w-5 h-5 rounded bg-surface-container-high print:bg-white flex items-center justify-center text-xs font-mono-code font-bold">1</div>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md font-bold">ISI (Intersymbol Interference, 심볼 간 간섭)</span>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">Sec. III-A, 식 (3)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">색분산(CD) 및 포토다이오드 대역폭 제한으로 인한 시간축 펄스 번짐 조건 및 나이퀴스트 제1기준 만족 여부 수기 확인</p>
+<div class="mt-2 bg-surface-container-low print:bg-transparent h-7 rounded flex items-center px-2 font-mono-cite text-mono-cite text-outline">
+<span>연구생 자필 주석: __________________________________________________________________________________</span>
+</div>
+</div>
+</div>
+<!-- Concept Item 2 -->
+<div class="p-space-sm bg-surface-container-lowest print:bg-white rounded flex items-start gap-space-md shadow-sm print:shadow-none">
+<div class="pt-0.5">
+<div class="w-5 h-5 rounded bg-surface-container-high print:bg-white flex items-center justify-center text-xs font-mono-code font-bold">2</div>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md font-bold">2차 Volterra 필터의 커널 연산 차수 (Kernel Truncation)</span>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">Sec. II-B, 수식</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">기하급수적으로 증가하는 곱셈 연산량 O(N²)과 하드웨어 DSP ASIC 구현 가능성 간의 트레이드오프 파악</p>
+<div class="mt-2 bg-surface-container-low print:bg-transparent h-7 rounded flex items-center px-2 font-mono-cite text-mono-cite text-outline">
+<span>연구생 자필 주석: __________________________________________________________________________________</span>
+</div>
+</div>
+</div>
+<!-- Concept Item 3 -->
+<div class="p-space-sm bg-surface-container-lowest print:bg-white rounded flex items-start gap-space-md shadow-sm print:shadow-none">
+<div class="pt-0.5">
+<div class="w-5 h-5 rounded bg-surface-container-high print:bg-white flex items-center justify-center text-xs font-mono-code font-bold">3</div>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md font-bold">BiLSTM 순방향/역방향 시간 지연 및 역전파 복잡도</span>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">Sec. IV-A</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">실시간 통신 파이프라인에서 비인과적(Non-causal) 역방향 레이어의 버퍼링 지연(Latency) 한계 평가</p>
+<div class="mt-2 bg-surface-container-low print:bg-transparent h-7 rounded flex items-center px-2 font-mono-cite text-mono-cite text-outline">
+<span>연구생 자필 주석: __________________________________________________________________________________</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Page 1 Bottom Metadata / Footer -->
+<div class="pt-space-md mt-space-md flex items-center justify-between font-mono-cite text-mono-cite text-on-surface-variant">
+<span>PaperPass · S. Keshav 3-Pass Method</span>
+<span class="font-bold text-primary print:text-black">Sheet 1 of 2 (Overview &amp; Checklist)</span>
+<span>A4 Portrait Standard · Lab Internal Use</span>
+</div>
+</section>
+<!-- Visual Page Break Indicator for Browser View -->
+<div class="hidden print:hidden md:flex items-center justify-center gap-space-sm py-space-xs text-outline font-mono-cite text-mono-cite">
+<div class="h-[1px] bg-outline-variant flex-grow"></div>
+<span class="flex items-center gap-1 bg-surface-container-high px-3 py-1 rounded-full text-on-surface">
+<span class="material-symbols-outlined text-sm">content_cut</span>
+        인쇄 페이지 구분선 (A4 Page Break: 2번째 장)
+      </span>
+<div class="h-[1px] bg-outline-variant flex-grow"></div>
+</div>
+<!-- ==================== PAGE 2 ==================== -->
+<section class="bg-surface-container-lowest p-[18mm] print:p-0 shadow-xl print:shadow-none min-h-[297mm] flex flex-col justify-between print:break-before-page rounded-lg print:rounded-none">
+<div class="flex flex-col gap-space-md">
+<!-- Page 2 Header Strip -->
+<div class="flex justify-between items-center pb-space-xs bg-surface-container-low p-space-sm rounded print:bg-transparent print:p-0">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-md text-headline-md font-bold">Pass 3: 가상 재현 및 비판적 검증 노트</span>
+<span class="font-mono-cite text-mono-cite bg-primary text-on-primary print:bg-neutral-800 print:text-white px-2 py-0.5 rounded">Handwritten Workspace</span>
+</div>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">112-Gb/s PAM4 IM/DD DL-EQ</span>
+</div>
+<!-- Question 1: 저자가 둔 가정과 숨겨진 한계는? -->
+<div class="bg-surface-container-low print:bg-white p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between">
+<h3 class="font-title-lg text-title-lg font-bold flex items-center gap-2">
+<span class="bg-primary text-on-primary print:bg-neutral-900 print:text-white font-mono-code text-xs px-2 py-0.5 rounded">Q1</span>
+              저자가 암묵적으로 둔 핵심 가정(Assumptions)과 밝히지 않은 실제 한계는?
+            </h3>
+<span class="font-mono-cite text-mono-cite text-outline">배경 소음, 광학 부품 노화, 온도 드리프트 고려 여부</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            가이드: 비선형 채널 모델의 정상 상태(Stationary) 가정의 타당성 및 실제 FPGA/ASIC 실장 시 전력 소모 한계점 기재
+          </p>
+<!-- Ruled Note Field (9mm spacing lines) -->
+<div class="w-full mt-space-xs flex flex-col gap-5 py-2">
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+</div>
+</div>
+<!-- Question 2: 연구실 가상 재현 체크리스트 -->
+<div class="bg-surface-container-low print:bg-white p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between">
+<h3 class="font-title-lg text-title-lg font-bold flex items-center gap-2">
+<span class="bg-primary text-on-primary print:bg-neutral-900 print:text-white font-mono-code text-xs px-2 py-0.5 rounded">Q2</span>
+              이 결과를 우리 연구실에서 재현(Reproduce)하려면 무엇이 필요한가?
+            </h3>
+<span class="font-mono-cite text-mono-cite text-outline">파라미터 / 하드웨어 장비 / 훈련 데이터셋 규격</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            가이드: AWG(임의파형발생기) 샘플링 속도, 오실로스코프 대역폭, PyTorch 모델 하이퍼파라미터, 옵티마이저 학습률
+          </p>
+<!-- Ruled Note Field -->
+<div class="w-full mt-space-xs flex flex-col gap-5 py-2">
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+</div>
+</div>
+<!-- Question 3: 내 개별 연구 주제와의 구체적 연계 -->
+<div class="bg-surface-container-low print:bg-white p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between">
+<h3 class="font-title-lg text-title-lg font-bold flex items-center gap-2">
+<span class="bg-primary text-on-primary print:bg-neutral-900 print:text-white font-mono-code text-xs px-2 py-0.5 rounded">Q3</span>
+              내 연구 과제(광통신 비선형 신호처리 등화기 설계)와 어떻게 연결할 것인가?
+            </h3>
+<span class="font-mono-cite text-mono-cite text-outline">차별화 아이디어 및 모델 경량화 가설</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            가이드: BiLSTM 대신 Transformer 어텐션 또는 CNN 1D 구조를 도입해 역방향 지연 문제를 해소할 수 있는가?
+          </p>
+<!-- Ruled Note Field -->
+<div class="w-full mt-space-xs flex flex-col gap-5 py-2">
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+<div class="w-full h-0.5 bg-surface-container-highest print:bg-slate-200"></div>
+</div>
+</div>
+<!-- Question 4: 후속 추적 참고문헌 (Follow-up Citations) -->
+<div class="bg-surface-container-low print:bg-white p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between">
+<h3 class="font-title-lg text-title-lg font-bold flex items-center gap-2">
+<span class="bg-primary text-on-primary print:bg-neutral-900 print:text-white font-mono-code text-xs px-2 py-0.5 rounded">Q4</span>
+              다음에 이어서 반드시 확인해야 할 핵심 참고문헌 (Forward / Backward References)
+            </h3>
+<span class="font-mono-cite text-mono-cite text-outline">최우선 추적 논문 2선</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md mt-space-xs">
+<!-- Ref Box 1 -->
+<div class="bg-surface-container-lowest print:bg-white p-space-sm rounded border-none flex flex-col gap-1 shadow-sm print:shadow-none">
+<div class="flex items-center gap-space-xs font-mono-code text-mono-code">
+<span class="px-1.5 py-0.5 bg-surface-container-high print:bg-slate-100 rounded font-bold">Ref [14]</span>
+<span class="text-on-surface font-semibold truncate">Volterra Series Benchmark (JLT '22)</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">확인 목적: 2차 Volterra 필터의 복잡도 식 및 하드웨어 승산기 개수 확인</span>
+<div class="mt-2 text-right">
+<span class="font-mono-cite text-mono-cite text-outline">[   ] 논문 PDF 다운로드 완료</span>
+</div>
+</div>
+<!-- Ref Box 2 -->
+<div class="bg-surface-container-lowest print:bg-white p-space-sm rounded border-none flex flex-col gap-1 shadow-sm print:shadow-none">
+<div class="flex items-center gap-space-xs font-mono-code text-mono-code">
+<span class="px-1.5 py-0.5 bg-surface-container-high print:bg-slate-100 rounded font-bold">Ref [21]</span>
+<span class="text-on-surface font-semibold truncate">Low-Latency RNN Equalizer (OFC '23)</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">확인 목적: 광통신 실시간 파이프라인에서 순환신경망 양방향 지연 해결 기법</span>
+<div class="mt-2 text-right">
+<span class="font-mono-cite text-mono-cite text-outline">[   ] 논문 PDF 다운로드 완료</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Page 2 Bottom Metadata / Footer -->
+<div class="pt-space-md mt-space-md flex items-center justify-between font-mono-cite text-mono-cite text-on-surface-variant">
+<span>PaperPass · S. Keshav 3-Pass Method</span>
+<span class="font-bold text-primary print:text-black">Sheet 2 of 2 (Critical Synthesis &amp; Next Steps)</span>
+<span>A4 Portrait Standard · Lab Internal Use</span>
+</div>
+</section>
+</div>
+</div></main></body></html>

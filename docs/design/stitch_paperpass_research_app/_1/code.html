@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>PaperPass — 3-pass 논문 읽기 노트</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "source-arxiv": "#dc2626", "outline-variant": "#c5c6cd", "primary-fixed": "#d8e3fb", "on-primary-fixed-variant": "#3c475a", "primary": "#091426", "secondary-container": "#316bf3", "surface-container-lowest": "#ffffff", "secondary-fixed": "#dbe1ff", "on-error": "#ffffff", "on-error-container": "#93000a", "surface-dim": "#cbdbf5", "source-ieee": "#2563eb", "source-other": "#475569", "inverse-primary": "#bcc7de", "on-surface-variant": "#45474c", "on-tertiary-fixed-variant": "#00504a", "status-understood-bg": "#dcfce7", "tertiary": "#001816", "surface-tint": "#545f73", "on-tertiary-container": "#469e95", "on-tertiary": "#ffffff", "secondary-fixed-dim": "#b4c5ff", "surface-container": "#e5eeff", "tertiary-fixed": "#9cf2e8", "on-secondary": "#ffffff", "paper-canvas": "#f8fafc", "on-background": "#0b1c30", "on-primary-fixed": "#111c2d", "primary-fixed-dim": "#bcc7de", "on-secondary-fixed-variant": "#003ea8", "secondary": "#0051d5", "error": "#ba1a1a", "inverse-surface": "#213145", "pass-step-active": "#0f172a", "outline": "#75777d", "status-unknown": "#d97706", "on-surface": "#0b1c30", "paper-border": "#e2e8f0", "background": "#f8f9ff", "paper-surface": "#ffffff", "pass-step-complete": "#2563eb", "surface-variant": "#d3e4fe", "surface": "#f8f9ff", "on-primary-container": "#8590a6", "surface-container-highest": "#d3e4fe", "source-arxiv-bg": "#fee2e2", "source-other-bg": "#f1f5f9", "primary-container": "#1e293b", "surface-container-high": "#dce9ff", "inverse-on-surface": "#eaf1ff", "status-understood": "#16a34a", "surface-container-low": "#eff4ff", "on-tertiary-fixed": "#00201d", "on-primary": "#ffffff", "error-container": "#ffdad6", "source-scholar": "#059669", "status-unknown-bg": "#fef3c7", "tertiary-fixed-dim": "#80d5cb", "surface-bright": "#f8f9ff", "status-lookup": "#ca8a04", "on-secondary-fixed": "#00174b", "source-ieee-bg": "#dbeafe", "tertiary-container": "#002f2b", "on-secondary-container": "#fefcff", "source-scholar-bg": "#d1fae5", "pass-step-pending": "#cbd5e1", "status-lookup-bg": "#fef9c3" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-2xl": "3rem", "space-md": "1rem", "margin": "2.5rem", "gutter-split": "2rem", "space-xl": "2rem", "space-2xs": "0.125rem", "gutter": "1.5rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-lg": [ "Newsreader" ], "mono-cite": [ "JetBrains Mono" ], "mono-code": [ "JetBrains Mono" ], "title-md": [ "Inter" ], "body-lg": [ "Inter" ], "body-md": [ "Inter" ], "headline-md": [ "Newsreader" ], "body-sm": [ "Inter" ], "title-lg": [ "Inter" ], "label-md": [ "Inter" ], "headline-xl": [ "Newsreader" ] }, "fontSize": { "headline-lg": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "mono-cite": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.01em", "fontWeight": "500" } ], "mono-code": [ "0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ], "title-md": [ "1rem", { "lineHeight": "1.5rem", "fontWeight": "600" } ], "body-lg": [ "1rem", { "lineHeight": "1.625rem", "fontWeight": "400" } ], "body-md": [ "0.875rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "headline-md": [ "1.375rem", { "lineHeight": "1.875rem", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ], "title-lg": [ "1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-xl": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ] } } } }</script></head><body class="bg-paper-canvas font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-paper-surface border-b border-paper-border shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-[1440px] mx-auto px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="PaperPass Academic Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrB9mw9h_TfiMeFwOufktEfSefSJnXzP5llZfStr0mzDG0Lcrt_C-m8jXJa1DX7XjOesl8Isoyya2jXqgZ7svgPz0rqOgX5r0mHpc2sf5jqTJl99OPJvZUhfJ18gj8QsPuhVyLCOZtX-FU4bp8o36TkoFMlGxnijrefStrW7eqdhwcmXAt2p8oGHrHgnBSXvOxIi_PjcPK-jsQLPBl5vmplh84mMqsnTy2a-8aaW-ctv"/><div class="flex flex-col"><span class="font-headline-md text-headline-md text-primary leading-tight">PaperPass</span><span class="font-mono-cite text-mono-cite text-on-surface-variant uppercase tracking-wider">3-Pass Paper Note</span></div></div><nav class="flex items-center gap-space-xs ml-space-sm" data-active-classes="bg-surface-container-high text-primary font-semibold rounded-lg"><a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-surface-container-high text-primary font-semibold rounded-lg" data-path="paper-list" href="#">논문 목록</a><a class="px-space-sm py-space-xs font-title-md text-title-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="concept-notebook" href="#">개념 노트</a><a class="px-space-sm py-space-xs font-title-md text-title-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="reading-workspace" href="#">현재 리딩</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-low border border-paper-border"><span class="inline-flex items-center gap-1 font-mono-cite text-mono-cite text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>읽는 중 <strong class="text-primary font-semibold">4</strong></span><span class="text-outline-variant font-mono-cite text-mono-cite">·</span><span class="inline-flex items-center gap-1 font-mono-cite text-mono-cite text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-status-understood"></span>완료 <strong class="text-primary font-semibold">2</strong></span><span class="text-outline-variant font-mono-cite text-mono-cite">·</span><span class="inline-flex items-center gap-1 font-mono-cite text-mono-cite text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-status-unknown"></span>미해결 개념 <strong class="text-error font-semibold">7</strong></span></div><div class="flex items-center gap-space-sm"><button class="hidden sm:inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-lg border border-paper-border bg-paper-surface hover:bg-paper-canvas text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">menu_book</span><span class="font-label-md text-label-md">가이드</span></button><button class="inline-flex items-center gap-1.5 px-space-md py-space-xs rounded-lg bg-primary-container hover:bg-primary text-on-primary font-title-md text-title-md transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span>논문 추가</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-paper-canvas min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Academic Context Banner -->
+<div class="w-full bg-surface-container-low px-margin py-space-md shadow-sm">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-2.5 h-10 bg-secondary rounded-full"></div>
+<div>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant uppercase tracking-wider block">Methodology Dashboard · S. Keshav Model</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">연구 논문 독해 현황</h1>
+</div>
+</div>
+<!-- Refined Metric Counter Pill Group -->
+<div class="flex flex-wrap items-center gap-space-xs bg-paper-surface px-space-md py-space-xs rounded-full shadow-sm">
+<div class="flex items-center gap-1.5 px-space-xs py-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-title-md text-title-md text-on-surface-variant">읽는 중</span>
+<span class="font-mono-code text-mono-code font-bold text-primary px-1.5 py-0.5 bg-surface-container rounded">4</span>
+</div>
+<span class="text-outline-variant font-mono-cite">•</span>
+<div class="flex items-center gap-1.5 px-space-xs py-1">
+<span class="w-2 h-2 rounded-full bg-status-understood"></span>
+<span class="font-title-md text-title-md text-on-surface-variant">완료</span>
+<span class="font-mono-code text-mono-code font-bold text-status-understood px-1.5 py-0.5 bg-status-understood-bg rounded">2</span>
+</div>
+<span class="text-outline-variant font-mono-cite">•</span>
+<div class="flex items-center gap-1.5 px-space-xs py-1">
+<span class="w-2 h-2 rounded-full bg-status-unknown"></span>
+<span class="font-title-md text-title-md text-on-surface-variant">미해결 개념</span>
+<span class="font-mono-code text-mono-code font-bold text-error px-1.5 py-0.5 bg-source-arxiv-bg rounded">7</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Canvas Container -->
+<div class="max-w-[1440px] mx-auto w-full px-margin py-space-xl flex flex-col gap-space-lg">
+<!-- Filter Control Hub -->
+<div class="bg-paper-surface p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<!-- Search row & Action CTA -->
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search bar -->
+<div class="relative flex-1 group">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-outline text-[20px] transition-colors group-focus-within:text-secondary">search</span>
+<input class="w-full bg-surface-container-low pl-11 pr-12 py-space-sm rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-paper-surface focus:shadow-md transition-all" id="paperSearchInput" maxlength="100" placeholder="논문 제목, 저자, 태그 검색... (예: PAM4, Volterra, Kim)" type="text"/>
+<button class="hidden absolute right-space-md top-1/2 -translate-y-1/2 text-outline hover:text-primary p-0.5 rounded-full" id="clearSearchBtn" onclick="clearSearch()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Add Paper Action Button -->
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="px-space-md py-space-sm bg-primary hover:bg-secondary text-on-primary rounded-lg font-title-md text-title-md flex items-center gap-2 shadow-sm transition-all duration-200 active:scale-[0.98]" onclick="openNewPaperModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">post_add</span>
+<span>+ 논문 추가</span>
+</button>
+</div>
+</div>
+<!-- Stage Segment Filter Pills -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex flex-wrap items-center gap-1.5" id="statusFilterContainer">
+<button class="filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-primary text-on-primary" data-filter="all">
+            전체 <span class="font-mono-cite text-mono-cite opacity-80">(6)</span>
+</button>
+<button class="filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-surface-container text-on-surface-variant hover:bg-surface-container-high" data-filter="todo">
+            읽을 것 <span class="font-mono-cite text-mono-cite opacity-80">(1)</span>
+</button>
+<button class="filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-surface-container text-on-surface-variant hover:bg-surface-container-high" data-filter="pass1">
+            1차 완료 <span class="font-mono-cite text-mono-cite opacity-80">(1)</span>
+</button>
+<button class="filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-surface-container text-on-surface-variant hover:bg-surface-container-high" data-filter="pass2">
+            2차 완료 <span class="font-mono-cite text-mono-cite opacity-80">(2)</span>
+</button>
+<button class="filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-surface-container text-on-surface-variant hover:bg-surface-container-high" data-filter="pass3">
+            3차 완료 <span class="font-mono-cite text-mono-cite opacity-80">(2)</span>
+</button>
+<button class="filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-surface-container text-on-surface-variant hover:bg-surface-container-high" data-filter="held">
+            보류 <span class="font-mono-cite text-mono-cite opacity-80">(1)</span>
+</button>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto font-mono-cite text-mono-cite text-on-surface-variant">
+<span>정렬:</span>
+<select class="bg-surface-container-low text-primary font-mono-cite text-mono-cite py-1 px-2 rounded focus:outline-none cursor-pointer">
+<option>최근 작성순</option>
+<option>미해결 개념순</option>
+<option>연도순 (최신)</option>
+</select>
+</div>
+</div>
+<!-- Domain Specialty Chips (Signal Processing & Optical Comms) -->
+<div class="flex items-center gap-space-xs flex-wrap pt-space-xs">
+<span class="font-mono-cite text-mono-cite text-outline uppercase tracking-wider mr-2">주요 태그</span>
+<button class="tag-chip px-space-sm py-0.5 rounded-full font-mono-cite text-mono-cite bg-surface-container-low text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors active:scale-95" data-tag="신호처리">#신호처리</button>
+<button class="tag-chip px-space-sm py-0.5 rounded-full font-mono-cite text-mono-cite bg-surface-container-low text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors active:scale-95" data-tag="비선형등화">#비선형등화</button>
+<button class="tag-chip px-space-sm py-0.5 rounded-full font-mono-cite text-mono-cite bg-surface-container-low text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors active:scale-95" data-tag="PAM4">#PAM4</button>
+<button class="tag-chip px-space-sm py-0.5 rounded-full font-mono-cite text-mono-cite bg-surface-container-low text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors active:scale-95" data-tag="IM/DD">#IM/DD</button>
+<button class="tag-chip px-space-sm py-0.5 rounded-full font-mono-cite text-mono-cite bg-surface-container-low text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors active:scale-95" data-tag="심층학습">#심층학습</button>
+<button class="tag-chip px-space-sm py-0.5 rounded-full font-mono-cite text-mono-cite bg-surface-container-low text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors active:scale-95" data-tag="DMT">#DMT</button>
+<button class="tag-chip px-space-sm py-0.5 rounded-full font-mono-cite text-mono-cite bg-surface-container-low text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors active:scale-95" data-tag="광링크">#광링크</button>
+</div>
+</div>
+<!-- Active Research Section Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-md text-headline-md text-primary">연구 아카이브</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-mono-code text-mono-code font-semibold" id="displayedCount">4건 표기 중</span>
+</div>
+<!-- S. Keshav Quick Reference Pill Indicator -->
+<div class="hidden md:flex items-center gap-3 font-mono-cite text-mono-cite text-on-surface-variant">
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-pass-step-pending"></span>Pass 1: 윤곽 파악</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-secondary"></span>Pass 2: 논리/수식 파악</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-primary"></span>Pass 3: 가상 재현 및 비판</div>
+</div>
+</div>
+<!-- Papers Grid Layout (Strictly 4 Cards from PRD + Realistic Attributes) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter" id="papersGrid">
+<!-- CARD 1: 2차 완료 (PAM4 Nonlinear Equalization) -->
+<article class="paper-card bg-paper-surface rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden" data-status="pass2" data-tags="PAM4 비선형등화 딥러닝 신호처리 IM/DD">
+<div class="flex flex-col gap-space-md">
+<!-- Card Header / Badges & Pass Step Indicator -->
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="bg-source-ieee-bg text-source-ieee font-mono-cite text-mono-cite uppercase px-2 py-0.5 rounded-md font-semibold tracking-wider">IEEE Xplore</span>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">PTL · 2024</span>
+</div>
+<!-- 3-Segment Pass Indicator (2/3 complete) -->
+<div class="flex items-center gap-1 bg-surface-container-low px-2 py-1 rounded-full" title="Pass 2 진행 완료 (2/3)">
+<span class="w-5 h-1.5 rounded-full bg-pass-step-complete"></span>
+<span class="w-5 h-1.5 rounded-full bg-pass-step-complete"></span>
+<span class="w-5 h-1.5 rounded-full bg-pass-step-pending"></span>
+<span class="font-mono-cite text-mono-cite font-semibold text-secondary ml-1">Pass 2</span>
+</div>
+</div>
+<!-- Paper Title & Metadata -->
+<div class="flex flex-col gap-space-xs">
+<a class="group-hover:text-secondary transition-colors" href="#">
+<h2 class="font-headline-md text-headline-md text-primary leading-snug line-clamp-2">
+                Deep Learning-Based Nonlinear Equalization for 112-Gb/s PAM4 IM/DD Optical Interconnects
+              </h2>
+</a>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">
+              J. Kim, H. Park, Y. Choi · <span class="italic">IEEE Photonics Technology Letters, Vol. 36</span>
+</p>
+</div>
+<!-- Abstract Keynote Insight Snippet -->
+<div class="bg-surface-container-low p-space-sm rounded-lg">
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              “Volterra 필터 대비 파라미터 연산 복잡도를 42% 절감하면서도 7% HD-FEC 역치(3.8×10⁻³)를 만족하는 3계층 양방향 GRU 기반 비선형 보상 구조 제안.”
+            </p>
+</div>
+<!-- Semantic Concept Resolution Pill -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 bg-status-unknown-bg text-status-unknown px-2.5 py-1 rounded-md font-label-md text-label-md font-semibold">
+<span class="w-2 h-2 rounded-full bg-status-unknown"></span>
+                모르는 개념 3건
+              </span>
+<span class="font-mono-cite text-mono-cite text-outline">SSMF, Mach-Zehnder 치핑, GRU</span>
+</div>
+</div>
+<!-- Keyword Chips -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#PAM4</span>
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#비선형등화</span>
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#딥러닝</span>
+</div>
+</div>
+<!-- Footer Action Area -->
+<div class="pt-space-md mt-space-md flex items-center justify-between">
+<span class="font-mono-cite text-mono-cite text-outline">최근 수정: 오늘 14:22</span>
+<a class="inline-flex items-center gap-1 font-title-md text-title-md text-secondary hover:text-primary font-semibold transition-colors group-hover:translate-x-0.5 transition-transform" href="#">
+<span>노트 계속 작성하기</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- CARD 2: 1차 완료 (Volterra Series vs Neural Network) -->
+<article class="paper-card bg-paper-surface rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden" data-status="pass1" data-tags="Volterra 분산보상 신호처리 광링크">
+<div class="flex flex-col gap-space-md">
+<!-- Badges & Pass Step (1/3 complete) -->
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="bg-source-arxiv-bg text-source-arxiv font-mono-cite text-mono-cite uppercase px-2 py-0.5 rounded-md font-semibold tracking-wider">arXiv:2308.11029</span>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">e-Print · 2023</span>
+</div>
+<!-- 3-Segment Pass Indicator (1/3 complete) -->
+<div class="flex items-center gap-1 bg-surface-container-low px-2 py-1 rounded-full" title="Pass 1 완료 (1/3)">
+<span class="w-5 h-1.5 rounded-full bg-pass-step-complete"></span>
+<span class="w-5 h-1.5 rounded-full bg-pass-step-pending"></span>
+<span class="w-5 h-1.5 rounded-full bg-pass-step-pending"></span>
+<span class="font-mono-cite text-mono-cite font-semibold text-on-surface-variant ml-1">Pass 1</span>
+</div>
+</div>
+<!-- Paper Title & Metadata -->
+<div class="flex flex-col gap-space-xs">
+<a class="group-hover:text-secondary transition-colors" href="#">
+<h2 class="font-headline-md text-headline-md text-primary leading-snug line-clamp-2">
+                Volterra Series vs. Neural Network Equalizers in Dispersion-Managed Optical Links
+              </h2>
+</a>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">
+              M. Chen, L. Wang · <span class="italic">Preprint arXiv physics.optics</span>
+</p>
+</div>
+<!-- Note Snippet -->
+<div class="bg-surface-container-low p-space-sm rounded-lg">
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              “색분산(CD)과 케르(Kerr) 비선형성이 공존하는 80km 표준 단일모드 광섬유에서 3차 Volterra 커널과 다층 퍼셉트론(MLP)의 하드웨어 전력 소모 비교 분석.”
+            </p>
+</div>
+<!-- Semantic Concept Resolution Pill -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 bg-status-unknown-bg text-status-unknown px-2.5 py-1 rounded-md font-label-md text-label-md font-semibold">
+<span class="w-2 h-2 rounded-full bg-status-unknown"></span>
+                모르는 개념 2건
+              </span>
+<span class="font-mono-cite text-mono-cite text-outline">Kerr 비선형 계수, 광학 위상 공액(OPC)</span>
+</div>
+</div>
+<!-- Keyword Chips -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#Volterra</span>
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#분산보상</span>
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#신호처리</span>
+</div>
+</div>
+<!-- Footer Action Area -->
+<div class="pt-space-md mt-space-md flex items-center justify-between">
+<span class="font-mono-cite text-mono-cite text-outline">최근 수정: 어제 18:40</span>
+<a class="inline-flex items-center gap-1 font-title-md text-title-md text-secondary hover:text-primary font-semibold transition-colors group-hover:translate-x-0.5 transition-transform" href="#">
+<span>Pass 2 진입하기</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- CARD 3: 읽을 것 (Geometric Deep Learning for DMT) -->
+<article class="paper-card bg-paper-surface rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden" data-status="todo" data-tags="DMT ISI 심층학습">
+<div class="flex flex-col gap-space-md">
+<!-- Badges & Pass Step (0/3 unread) -->
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="bg-source-scholar-bg text-source-scholar font-mono-cite text-mono-cite uppercase px-2 py-0.5 rounded-md font-semibold tracking-wider">Google Scholar</span>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">Early Access · 2025</span>
+</div>
+<!-- 3-Segment Pass Indicator (0/3 complete) -->
+<div class="flex items-center gap-1 bg-surface-container-low px-2 py-1 rounded-full" title="아직 읽지 않음 (0/3)">
+<span class="w-5 h-1.5 rounded-full bg-pass-step-pending"></span>
+<span class="w-5 h-1.5 rounded-full bg-pass-step-pending"></span>
+<span class="w-5 h-1.5 rounded-full bg-pass-step-pending"></span>
+<span class="font-mono-cite text-mono-cite font-semibold text-outline ml-1">대기중</span>
+</div>
+</div>
+<!-- Paper Title & Metadata -->
+<div class="flex flex-col gap-space-xs">
+<a class="group-hover:text-secondary transition-colors" href="#">
+<h2 class="font-headline-md text-headline-md text-primary leading-snug line-clamp-2">
+                Geometric Deep Learning for High-Speed DMT Signal Demodulation under Severe ISI
+              </h2>
+</a>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">
+              A. Smith, R. Taylor · <span class="italic">Journal of Lightwave Technology</span>
+</p>
+</div>
+<!-- Note Snippet -->
+<div class="bg-surface-container-low p-space-sm rounded-lg">
+<p class="font-body-sm text-body-sm text-outline italic">
+              아직 1차 패스(Pass 1: 구조적 개요 훑어보기)가 시작되지 않았습니다. Keshav 가이드라인에 따라 제목, 초록, 다이어그램을 먼저 스캔하세요.
+            </p>
+</div>
+<!-- Semantic Concept Resolution Pill -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 bg-surface-container text-on-surface-variant px-2.5 py-1 rounded-md font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+                개념 등록 전
+              </span>
+<span class="font-mono-cite text-mono-cite text-outline">문서 훑어보기 대기</span>
+</div>
+</div>
+<!-- Keyword Chips -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#DMT</span>
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#ISI</span>
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#심층학습</span>
+</div>
+</div>
+<!-- Footer Action Area -->
+<div class="pt-space-md mt-space-md flex items-center justify-between">
+<span class="font-mono-cite text-mono-cite text-outline">등록: 2일 전</span>
+<a class="inline-flex items-center gap-1 font-title-md text-title-md text-secondary hover:text-primary font-semibold transition-colors group-hover:translate-x-0.5 transition-transform" href="#">
+<span>Pass 1 훑기 시작</span>
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</a>
+</div>
+</article>
+<!-- CARD 4: 3차 완료 (End-to-End Learned Transceivers) -->
+<article class="paper-card bg-paper-surface rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden" data-status="pass3" data-tags="End-to-End Autoencoder 광링크 신호처리">
+<div class="flex flex-col gap-space-md">
+<!-- Badges & Pass Step (3/3 complete) -->
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="bg-source-ieee-bg text-source-ieee font-mono-cite text-mono-cite uppercase px-2 py-0.5 rounded-md font-semibold tracking-wider">IEEE Xplore</span>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">JLT · 2023</span>
+</div>
+<!-- 3-Segment Pass Indicator (3/3 complete) -->
+<div class="flex items-center gap-1 bg-status-understood-bg px-2 py-1 rounded-full" title="Pass 3 완전 독해 완료 (3/3)">
+<span class="w-5 h-1.5 rounded-full bg-status-understood"></span>
+<span class="w-5 h-1.5 rounded-full bg-status-understood"></span>
+<span class="w-5 h-1.5 rounded-full bg-status-understood"></span>
+<span class="font-mono-cite text-mono-cite font-semibold text-status-understood ml-1">독해 완독</span>
+</div>
+</div>
+<!-- Paper Title & Metadata -->
+<div class="flex flex-col gap-space-xs">
+<a class="group-hover:text-secondary transition-colors" href="#">
+<h2 class="font-headline-md text-headline-md text-primary leading-snug line-clamp-2">
+                End-to-End Learned Transceivers for Short-Reach Optical Communications
+              </h2>
+</a>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">
+              F. Karan, S. Lee · <span class="italic">Journal of Lightwave Technology, Vol. 41</span>
+</p>
+</div>
+<!-- Summary Snippet -->
+<div class="bg-surface-container-low p-space-sm rounded-lg">
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              “미분 가능한 광 채널 모델(Differentiable Fiber Channel)을 구성하여 송수신기를 통합 오토인코더로 공동 최적화. 가상 재현 완료 및 SNR 이득 검증.”
+            </p>
+</div>
+<!-- Semantic Concept Resolution Pill -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 bg-status-understood-bg text-status-understood px-2.5 py-1 rounded-md font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                모든 개념 해결됨 ✓
+              </span>
+<span class="font-mono-cite text-mono-cite text-on-surface-variant">5개 전제개념 정리 완료</span>
+</div>
+</div>
+<!-- Keyword Chips -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#End-to-End</span>
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#Autoencoder</span>
+<span class="px-2 py-0.5 rounded font-mono-cite text-mono-cite bg-surface-container text-on-surface-variant">#광링크</span>
+</div>
+</div>
+<!-- Footer Action Area -->
+<div class="pt-space-md mt-space-md flex items-center justify-between">
+<span class="font-mono-cite text-mono-cite text-status-understood font-medium">Pass 3 비판적 리뷰 작성됨</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-2 py-1 bg-surface-container hover:bg-surface-container-high rounded text-on-surface-variant hover:text-primary transition-colors font-mono-cite text-mono-cite flex items-center gap-1" title="A4 인쇄용 요약본 내보내기">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>A4 출력</span>
+</button>
+<a class="inline-flex items-center gap-1 font-title-md text-title-md text-primary hover:text-secondary font-semibold transition-colors" href="#">
+<span>노트 열람</span>
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</a>
+</div>
+</div>
+</article>
+</div>
+<!-- Empty / No-Search Results State (Hidden by default, shown via search/filter) -->
+<div class="hidden bg-paper-surface rounded-xl p-space-2xl text-center shadow-sm flex flex-col items-center justify-center gap-space-sm" id="noResultsState">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-outline mb-space-xs">
+<span class="material-symbols-outlined text-[32px]">manage_search</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">일치하는 논문을 찾을 수 없습니다</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+        입력하신 검색어나 선택된 필터 조건에 부합하는 연구 논문이 목록에 없습니다. 검색어를 재확인하거나 필터를 초기화해 보세요.
+      </p>
+<button class="mt-space-sm px-space-md py-space-xs bg-surface-container-high hover:bg-primary hover:text-on-primary text-primary font-title-md text-title-md rounded-lg transition-colors" onclick="resetAllFilters()">
+        전체 필터 초기화
+      </button>
+</div>
+<!-- Supplementary Academic Guide Banner -->
+<div class="w-full bg-surface-container-high rounded-xl p-space-lg shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="p-2.5 bg-paper-surface rounded-lg text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">school</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg text-primary">S. Keshav 3-Pass 접근 전략 가이드</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            1차(훑기 5~10분: 제목, 초록, 결론) → 2차(이해 1시간: 그래프 및 기본 수식) → 3차(깊이 3시간+: 저자의 가정을 증명 없이 믿지 않고 백지에서 가상 재현).
+          </p>
+</div>
+</div>
+<a class="shrink-0 px-space-md py-space-xs rounded-lg bg-paper-surface hover:bg-surface text-primary font-title-md text-title-md shadow-sm transition-colors flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+<span>독해 가이드라인</span>
+</a>
+</div>
+</div>
+<!-- Client Interaction Script -->
+<script>
+    const searchInput = document.getElementById('paperSearchInput');
+    const clearBtn = document.getElementById('clearSearchBtn');
+    const papers = document.querySelectorAll('.paper-card');
+    const noResults = document.getElementById('noResultsState');
+    const displayedCount = document.getElementById('displayedCount');
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const tagChips = document.querySelectorAll('.tag-chip');
+
+    let currentStatus = 'all';
+    let activeTag = null;
+
+    function updateView() {
+      const query = (searchInput.value || '').trim().toLowerCase();
+      let visibleCount = 0;
+
+      papers.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const status = card.getAttribute('data-status');
+        const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+
+        const matchesQuery = !query || text.includes(query);
+        const matchesStatus = (currentStatus === 'all') || (status === currentStatus);
+        const matchesTag = !activeTag || tags.includes(activeTag.toLowerCase());
+
+        if (matchesQuery && matchesStatus && matchesTag) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      displayedCount.textContent = `${visibleCount}건 표기 중`;
+
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+
+      if (query.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+    }
+
+    searchInput.addEventListener('input', updateView);
+
+    function clearSearch() {
+      searchInput.value = '';
+      updateView();
+      searchInput.focus();
+    }
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => {
+          t.className = 'filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-surface-container text-on-surface-variant hover:bg-surface-container-high';
+        });
+        tab.className = 'filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-primary text-on-primary';
+        currentStatus = tab.getAttribute('data-filter');
+        updateView();
+      });
+    });
+
+    tagChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const tag = chip.getAttribute('data-tag');
+        if (activeTag === tag) {
+          activeTag = null;
+          chip.classList.remove('bg-primary', 'text-on-primary');
+          chip.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+        } else {
+          tagChips.forEach(c => {
+            c.classList.remove('bg-primary', 'text-on-primary');
+            c.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+          });
+          activeTag = tag;
+          chip.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+          chip.classList.add('bg-primary', 'text-on-primary');
+        }
+        updateView();
+      });
+    });
+
+    function resetAllFilters() {
+      searchInput.value = '';
+      currentStatus = 'all';
+      activeTag = null;
+
+      filterTabs.forEach((t, idx) => {
+        if (idx === 0) {
+          t.className = 'filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-primary text-on-primary';
+        } else {
+          t.className = 'filter-tab px-space-md py-1 rounded-full font-title-md text-title-md transition-colors bg-surface-container text-on-surface-variant hover:bg-surface-container-high';
+        }
+      });
+
+      tagChips.forEach(c => {
+        c.classList.remove('bg-primary', 'text-on-primary');
+        c.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+      });
+
+      updateView();
+    }
+
+    function openNewPaperModal() {
+      const title = prompt("추가할 연구 논문의 제목을 입력하세요 (예: 100G PAM4 Optical Receiver Architecture):");
+      if (title && title.trim()) {
+        alert(`'${title.trim()}' 논문이 임시 등록되었습니다. 1차 패스(훑기) 화면으로 이동합니다.`);
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-paper-surface border-t border-paper-border py-space-lg"><div class="max-w-[1440px] mx-auto px-margin flex flex-col md:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm font-mono-cite text-mono-cite text-on-surface-variant"><span>S. Keshav 3-Pass Method Framework</span><span class="text-outline-variant">|</span><span>Optical &amp; Signal Processing Lab</span></div><div class="font-mono-cite text-mono-cite text-on-surface-variant">© 2024 PaperPass. Academic Minimalist Research System.</div></div></footer></body></html>
