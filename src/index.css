@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    min-width: 1280px; /* PC only (PRD §6) */
+  }
+  body {
+    @apply bg-canvas font-sans text-ink;
+  }
+}
+
+@page {
+  size: A4 portrait;
+  margin: 15mm;
+}
+
+@media print {
+  html {
+    min-width: 0;
+  }
+  body {
+    background: #fff !important;
+    color: #000;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .worksheet {
+    max-width: none;
+  }
+  .page-break {
+    break-after: page;
+    page-break-after: always;
+    height: 0;
+  }
+  .sheet {
+    break-inside: auto;
+  }
+}
